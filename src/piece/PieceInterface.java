@@ -22,4 +22,9 @@ public interface PieceInterface {
 	 * @return An array containing the x-axis and the y-axis position of the piece.
 	 */
 	int getPos();
+	
+	/**
+	 * Moves the piece.
+	 */
+	void move();
 }
