@@ -16,4 +16,10 @@ public interface PieceInterface {
 	 * @return An integer corresponding to the y-axis position of the piece.
 	 */
 	int getPosY();
+	
+	/**
+	 * Gives the position of the piece.
+	 * @return An array containing the x-axis and the y-axis position of the piece.
+	 */
+	int getPos();
 }
