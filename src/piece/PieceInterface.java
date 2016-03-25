@@ -1,11 +1,8 @@
-/**
- * This is the interface for the piece
- */
 package piece;
 
 /**
+ * Interface for the piece.
  * @author Édouard WILLISSECK
- *
  */
 public interface PieceInterface {
 	/**
