@@ -3,6 +3,8 @@ package board;
 import piece.Piece;
 import team.Team;
 
+//TODO: Finish the javadoc.
+//TODO: Check the paramater when setting the pos (must be within board height and width)
 public abstract class Square {
 	private int posX;
 	private int poxY;
@@ -10,8 +12,6 @@ public abstract class Square {
 	private Piece pieceOnSquare;
 	private Board board;
 
-	//TODO: Finish the javadoc.
-	
 	/**
 	 * Get the board the Square is linked to.
 	 * 
@@ -20,22 +20,24 @@ public abstract class Square {
 	public Board getBoard() {
 		return board;
 	}
-	
+
 	/**
 	 * Set the board the Square is linked to.
 	 * 
-	 * @param board The Board the Square is linked to.
+	 * @param board
+	 *            The Board the Square is linked to.
 	 */
 	public void setBoard(Board board) {
 		if (board == null)
 			throw new IllegalArgumentException();
 		this.board = board;
 	}
-	
+
 	/**
 	 * Set a Piece on the Square.
 	 * 
-	 * @param piece The Piece to put on the Square.
+	 * @param piece
+	 *            The Piece to put on the Square.
 	 */
 	public void setPieceOnSquare(Piece piece) {
 		if (piece == null)
