@@ -1,6 +1,8 @@
 package tests;
 
 import dice.Dice;
+import game.Game;
+import team.Team;
 import board.*;
 
 public class Tester {
@@ -13,8 +15,22 @@ public class Tester {
 		}
 	}
 	
-	public static void testSquare() {
+	public static void testTeam() {
+		Game chevaux = new Game(4);
+		Team team1 = new Team(1, chevaux);
+		Team team2 = new Team(2, chevaux);
+		Team team3 = new Team(3, chevaux);
+		Team team4 = new Team(4, chevaux);
+		//Throws IllegalArgumentException because the game has only 4 teams.
+		//Team team5 = new Team(5, chevaux);
+		Team team6 = new Team(4, chevaux);
 		
+		if (team6.equals(team4))
+			System.out.println("Team 6 = Team 4");
+		if (!(team6.equals(team3)))
+			System.out.println("Team 6 != Team 4");
+		
+		System.out.println(team1);
 	}
 
 }

@@ -5,7 +5,7 @@ import tests.Tester;
 public class Application {
 
 	public static void main(String[] args) {
-		Tester.testDice();
+		Tester.testTeam();
 	}
 
 }
