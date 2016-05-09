@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>jeu_chevaux</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>bin</name>
+			<type>2</type>
+			<location>C:/Users/Martial/Documents/Vie scolaire/L2 metz/JAVA/Java projet dada git/horses_game/bin</location>
+		</link>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<location>C:/Users/Martial/Documents/Vie scolaire/L2 metz/JAVA/Java projet dada git/horses_game/src</location>
+		</link>
+	</linkedResources>
+</projectDescription>
