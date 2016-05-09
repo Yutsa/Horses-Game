@@ -1,2 +1,0 @@
-INDEX VERSION 1.127+C:\Users\Martial\Documents\Vie scolaire\L2 metz\JAVA\Java projet dada git\horses_game\.metadata\.plugins\org.eclipse.jdt.core
-3465765727.index

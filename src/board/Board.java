@@ -1,35 +1,75 @@
 package board;
 
-//TODO: Make the Javadoc
 public abstract class Board {
 	private int width;
 	private int height;
 	private Square[][] squares;
 
+	/**
+	 * Get the width of the Board.
+	 * 
+	 * @return The width of the Board.
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Set the width of the Board.
+	 * 
+	 * @param width
+	 *            The width of the Board.
+	 */
 	public void setWidth(int width) {
 		if (width <= 0)
 			throw new IllegalArgumentException();
 		this.width = width;
 	}
 
+	/**
+	 * Get the height of the Board.
+	 * 
+	 * @return The height of the Board.
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * Set the height of the Board.
+	 * 
+	 * @param height
+	 *            The height of the Board.
+	 */
 	public void setHeight(int height) {
 		if (height <= 0)
 			throw new IllegalArgumentException();
 		this.height = height;
 	}
 
+	/**
+	 * Get the Square of at the (x, y) position in the Board.
+	 * 
+	 * @param x
+	 *            The x-axis position of the Square.
+	 * @param y
+	 *            The y-axis position of the Square.
+	 * @return The Square at the (x, y) position in the Board.
+	 */
 	public Square getSquare(int x, int y) {
 		return squares[x][y];
 	}
 
+	/**
+	 * Get the Square of at the (x, y) position in the Board.
+	 * 
+	 * @param square
+	 *            The instance of a Square to put in the Board.
+	 * @param x
+	 *            The x-axis position of the Square.
+	 * @param y
+	 *            The y-axis position of the Square.
+	 */
 	public void setSquare(Square square, int x, int y) {
 		if (square == null)
 			throw new IllegalArgumentException();

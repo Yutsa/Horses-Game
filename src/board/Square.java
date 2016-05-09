@@ -4,10 +4,9 @@ import piece.Piece;
 import team.Team;
 
 //TODO: Finish the javadoc.
-//TODO: Check the paramater when setting the pos (must be within board height and width)
 public abstract class Square {
 	private int posX;
-	private int poxY;
+	private int posY;
 	private Team team;
 	private Piece pieceOnSquare;
 	private Board board;
@@ -55,43 +54,61 @@ public abstract class Square {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Get the x-axis position of the Square on the Board.
+	 * 
+	 * @return An integer representing the x-axis position of the Square on the
+	 *         Board.
 	 */
 	public int getPosX() {
 		return posX;
 	}
 
 	/**
+	 * Set the x-axis position of the Square on the Board.
+	 * 
 	 * @param posX
+	 *            An integer representing the x-axis position of the Square on
+	 *            the Board.
 	 */
 	public void setPosX(int posX) {
+		if (posX < 0 || posX > board.getWidth())
+			throw new IllegalArgumentException();
 		this.posX = posX;
 	}
 
 	/**
-	 * @return
+	 * Get the y-axis position of the Square.
+	 * 
+	 * @return An integer representing the y-axis position of the Square.
 	 */
-	public int getPoxY() {
-		return poxY;
+	public int getPosY() {
+		return posY;
 	}
 
 	/**
-	 * @param poxY
+	 * Set the y-axis position of the Square.
+	 * 
+	 * @return An integer representing the y-axis position of the Square.
 	 */
-	public void setPoxY(int poxY) {
-		this.poxY = poxY;
+	public void setPosY(int posY) {
+		if (posY < 0 || posY > board.getHeight())
+			throw new IllegalArgumentException();
+		this.posY = posY;
 	}
 
 	/**
-	 * @return
+	 * Get the Square's Team.
+	 * 
+	 * @return The Square's Team.
 	 */
 	public Team getTeam() {
 		return team;
 	}
 
 	/**
-	 * @param team
+	 * Set the Square's Team.
+	 * 
+	 * @param team The Square's Team.
 	 */
 	public void setTeam(Team team) {
 		if (team == null)
@@ -101,7 +118,7 @@ public abstract class Square {
 
 	@Override
 	public String toString() {
-		return "Square [posX=" + posX + ", poxY=" + poxY + ", team=" + team + "isEmpty=" + this.isEmpty() + "]";
+		return "Square [posX=" + posX + ", poxY=" + posY + ", team=" + team + "isEmpty=" + this.isEmpty() + "]";
 	}
 
 	@Override
@@ -115,7 +132,7 @@ public abstract class Square {
 		Square other = (Square) obj;
 		if (posX != other.posX)
 			return false;
-		if (poxY != other.poxY)
+		if (posY != other.posY)
 			return false;
 		if (team == null) {
 			if (other.team != null)
@@ -126,7 +143,9 @@ public abstract class Square {
 	}
 
 	/**
-	 * @return
+	 * Check if the Square is empty.
+	 * 
+	 * @return True if the Square is empty, False otherwise.
 	 */
 	public boolean isEmpty() {
 		return this.pieceOnSquare == null;
