@@ -1,6 +1,9 @@
 package team;
 
+import java.util.ArrayList;
+
 import game.Game;
+import piece.Piece;
 
 /**
  * A class reprenseting a team for a board game.
@@ -11,6 +14,7 @@ import game.Game;
 public class Team {
 	private int color;
 	private Game game;
+	private ArrayList<Piece> pieces;
 
 	/**
 	 * Basic constructor.
@@ -68,7 +72,54 @@ public class Team {
 		}
 		this.color = color;
 	}
+	
+	/**
+	 * Get the Team's i piece.
+	 * @param i The index of the piece to get.
+	 * @return The piece at index i
+	 */
+	public Piece getPiece(int i) {
+		return pieces.get(i);
+	}
+	
+	/**
+	 * Add a piece to the Team's pieces.
+	 * @param p The Piece to add.
+	 */
+	public void addPiece(Piece p) {
+		if (p == null)
+			throw new IllegalArgumentException();
+		pieces.add(p);
+	}
+	
+	/**
+	 * Remove a Piece from the Team's pieces. 
+	 * @param p The Piece to remove.
+	 */
+	public void removePiece(Piece p) {
+		if (p == null)
+			throw new IllegalArgumentException();
+		if (!pieces.contains(p))
+			throw new IllegalArgumentException();
+		pieces.remove(p);
+	}
+	
+	/**
+	 * Get the number of pieces from this team.
+	 * @return The number of pieces from this team.
+	 */
+	public int getNbPieces() {
+		return pieces.size();
+	}
 
+	/**
+	 * Say if the Team still has pieces left or not.
+	 * 
+	 * @return A boolean, true if the Team still has pieces, false otherwise.
+	 */
+	public boolean hasPiecesLeft() {
+		return getNbPieces() != 0;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

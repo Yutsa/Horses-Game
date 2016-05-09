@@ -1,6 +1,7 @@
 package game;
 
 //TODO: Implement Game
+//TODO: Implement the Movement System.
 public class Game {
 	private int nbTeam;
 

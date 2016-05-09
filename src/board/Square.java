@@ -3,7 +3,6 @@ package board;
 import piece.Piece;
 import team.Team;
 
-//TODO: Finish the javadoc.
 public abstract class Square {
 	private int posX;
 	private int posY;
@@ -108,7 +107,8 @@ public abstract class Square {
 	/**
 	 * Set the Square's Team.
 	 * 
-	 * @param team The Square's Team.
+	 * @param team
+	 *            The Square's Team.
 	 */
 	public void setTeam(Team team) {
 		if (team == null)
