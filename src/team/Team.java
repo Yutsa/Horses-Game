@@ -2,7 +2,7 @@ package team;
 
 import java.util.ArrayList;
 
-import game.Game;
+import game.HorsesGame;
 import piece.Piece;
 
 /**
@@ -13,7 +13,7 @@ import piece.Piece;
  */
 public class Team {
 	private int color;
-	private Game game;
+	private HorsesGame game;
 	private ArrayList<Piece> pieces;
 
 	/**
@@ -25,7 +25,7 @@ public class Team {
 	 * @param game
 	 *            The Game being played by the Team.
 	 */
-	public Team(int color, Game game) {
+	public Team(int color, HorsesGame game) {
 		setGame(game);
 		setColor(color);
 	}
@@ -39,7 +39,7 @@ public class Team {
 	 * 
 	 * @return The game being played by the Team.
 	 */
-	public Game getGame() {
+	public HorsesGame getGame() {
 		return game;
 	}
 
@@ -49,7 +49,7 @@ public class Team {
 	 * @param game
 	 *            The game being played.
 	 */
-	public void setGame(Game game) {
+	public void setGame(HorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;

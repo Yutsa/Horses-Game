@@ -16,7 +16,6 @@ public abstract class Square {
 		setPosY(posY);
 		setTeam(team);
 		setBoard(board);
-		
 	}
 	/**
 	 * Get the board the Square is linked to.

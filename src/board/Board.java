@@ -1,28 +1,28 @@
 package board;
 
-import game.Game;
+import game.HorsesGame;
 
 // Faire javadoc
 public abstract class Board {
 	private int width;
 	private int height;
 	private Square[][] squares;
-	private Game game;
+	private HorsesGame game;
 
-	public Board(int width, int height, Game game) {
+	public Board(int width, int height, HorsesGame game) {
 		setWidth(width);
 		setHeight(height);
 		setGame(game);
 		squares = new Square[width][height];
 	}
 	
-	public void setGame(Game game) {
+	public void setGame(HorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;
 	}
 	
-	public Game getGame() {
+	public HorsesGame getGame() {
 		return this.game;
 	}
 	
