@@ -31,6 +31,9 @@ public class Tester {
 			System.out.println("Team 6 != Team 4");
 		
 		System.out.println(team1);
+		
+		BoardHorses board = new BoardHorses(chevaux);
+		System.out.println(board);
 	}
 
 }

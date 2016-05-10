@@ -12,10 +12,10 @@ public abstract class Square {
 
 	
 	public Square(int posX, int posY, Team team, Board board) {
+		setBoard(board);
 		setPosX(posX);
 		setPosY(posY);
 		setTeam(team);
-		setBoard(board);
 	}
 	/**
 	 * Get the board the Square is linked to.
