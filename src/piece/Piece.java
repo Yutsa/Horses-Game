@@ -9,7 +9,7 @@ import team.Team;
 /**
  * Abstract class for the pieces.
  * 
- * @author Édouard WILLISSECK et R�my LADIESSE
+ * @author Édouard WILLISSECK
  */
 public abstract class Piece {
 	private Square square;

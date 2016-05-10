@@ -1,10 +1,35 @@
 package board;
 
+import game.Game;
+
+// Faire javadoc
 public abstract class Board {
 	private int width;
 	private int height;
 	private Square[][] squares;
+	private Game game;
 
+	public Board(int width, int height, Game game) {
+		setWidth(width);
+		setHeight(height);
+		setGame(game);
+		squares = new Square[width][height];
+	}
+	
+	public void setGame(Game game) {
+		if (game == null)
+			throw new IllegalArgumentException();
+		this.game = game;
+	}
+	
+	public Game getGame() {
+		return this.game;
+	}
+	
+	public Square[][] getBoard() {
+		return this.squares;
+	}
+	
 	/**
 	 * Get the width of the Board.
 	 * 

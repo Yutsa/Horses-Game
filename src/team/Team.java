@@ -30,6 +30,10 @@ public class Team {
 		setColor(color);
 	}
 
+	public void createPieces() {
+		
+	}
+	
 	/**
 	 * Gets the game being played by the team.
 	 * 
@@ -79,6 +83,8 @@ public class Team {
 	 * @return The piece at index i
 	 */
 	public Piece getPiece(int i) {
+		if (i < 0)
+			throw new IllegalArgumentException();
 		return pieces.get(i);
 	}
 	

@@ -16,7 +16,7 @@ public class Tester {
 	}
 	
 	public static void testTeam() {
-		Game chevaux = new Game(4);
+		Game chevaux = new Game(4, 4);
 		Team team1 = new Team(1, chevaux);
 		Team team2 = new Team(2, chevaux);
 		Team team3 = new Team(3, chevaux);

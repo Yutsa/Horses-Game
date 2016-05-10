@@ -10,6 +10,14 @@ public abstract class Square {
 	private Piece pieceOnSquare;
 	private Board board;
 
+	
+	public Square(int posX, int posY, Team team, Board board) {
+		setPosX(posX);
+		setPosY(posY);
+		setTeam(team);
+		setBoard(board);
+		
+	}
 	/**
 	 * Get the board the Square is linked to.
 	 * 
