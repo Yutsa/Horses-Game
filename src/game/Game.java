@@ -2,12 +2,25 @@ package game;
 
 import java.util.ArrayList;
 
+import board.Board;
 import team.Team;
 
 public abstract class Game {
 
 	private int nbTeam;
 	private int nbPiece;
+	private Board board;
+	
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		if (board == null)
+			throw new IllegalArgumentException();
+		this.board = board;
+	}
+
 	private ArrayList<Team> teams;
 
 	public Game(int nbTeam, int nbPiece) {

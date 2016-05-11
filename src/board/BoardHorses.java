@@ -96,14 +96,6 @@ public class BoardHorses extends Board {
 		}
 	}
 
-	/**
-	 * Get the coordinates of a free horsepen slot for the team given.
-	 * @param team The team you want a free horspen slot for.
-	 * @return the coordinates of a free horsepen slot for the team given stored in an int[2].
-	 */
-	public int[] getEmptyHorsePenCoord(Team team) {
-		
-	}
 	@Override
 	public String toString() {
 		String board = "";

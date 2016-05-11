@@ -17,6 +17,7 @@ public class Team {
 	private Game game;
 	private ArrayList<Piece> pieces;
 
+	
 	/**
 	 * Basic constructor.
 	 * 
@@ -31,6 +32,7 @@ public class Team {
 		setColor(color);
 	}
 
+	//TODO: Implement this.
 	public void createPieces() {
 		
 	}
