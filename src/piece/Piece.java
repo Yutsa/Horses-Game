@@ -27,19 +27,6 @@ public abstract class Piece {
 		setAlive(alive);
 		setTeam(team);
 	}
-	
-	/**
-	 * Moves the piece.
-	 * 
-	 * @throws PathBlockedException
-	 *             Exception indicating that another piece is blocking the way.
-	 */
-	public abstract void move() throws PathBlockedException;
-
-	/**
-	 * Method to kill another piece.
-	 */
-	public abstract void killPiece();
 
 	/**
 	 * Get the square the piece is on.

@@ -2,6 +2,7 @@ package game;
 
 import board.BoardHorses;
 import board.Square;
+import exceptions.PathBlockedException;
 import piece.Piece;
 
 //TODO: Implement Game
@@ -114,8 +115,12 @@ public class HorsesGame extends Game {
 		}
 		return getBoard().getSquare(coordX, coordY);
 	}
-	
-	void move(Piece piece) {
-		
+
+	public void move() throws PathBlockedException {
+		// TODO Auto-generated method stub
+	}
+
+	public void killPiece() {
+		// TODO Auto-generated method stub
 	}
 }
