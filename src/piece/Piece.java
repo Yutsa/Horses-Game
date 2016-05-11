@@ -17,7 +17,7 @@ public abstract class Piece {
 	private Team team;
 
 	
-	public Piece(Square square, boolean alive, Team team) {
+	public Piece(int x, int y, boolean alive, Team team) {
 		setSquare(square);
 		setAlive(alive);
 		setTeam(team);

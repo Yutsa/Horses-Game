@@ -111,4 +111,15 @@ public class HorsesGame extends Game {
 		}
 		return getBoard().getSquare(coordX, coordY);
 	}
+	public void move() throws PathBlockedException {
+		// TODO Auto-generated method stub
+		
+
+	}
+
+	@Override
+	public void killPiece() {
+		// TODO Auto-generated method stub
+		
+	}
 }

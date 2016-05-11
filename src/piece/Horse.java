@@ -20,15 +20,6 @@ public class Horse extends Piece {
 	
 	// If a horse has to go back to the horsepen, use getEmptyHorsePenCoord(Team
 	// team).
-	@Override
-	public void move() throws PathBlockedException {
-		// TODO Auto-generated method stub
 
-	}
 
-	@Override
-	public void killPiece() {
-		// TODO Auto-generated method stub
-
-	}
 }

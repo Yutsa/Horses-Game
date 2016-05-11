@@ -30,13 +30,18 @@ public class Team {
 	public Team(int color, Game game2) {
 		setGame(game2);
 		setColor(color);
+		pieces = new ArrayList<Piece>();
+		for (int i = 1; i <= getNbPieces(); i++)
+		{
+			pieces.add(createPieces(i, this));
+		}
 	}
 
 	//TODO: Implement this.
-	public void createPieces() {
+	public Piece createPieces(int x, int y, boolean alive, Team team) {
+		return new Piece(x, y, alive, team);
 		
 	}
-	
 	/**
 	 * Gets the game being played by the team.
 	 * 
