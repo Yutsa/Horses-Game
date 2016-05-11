@@ -11,14 +11,19 @@ import team.Team;
  * 
  * @author Édouard WILLISSECK
  */
+
+//TODO: Give a starting square to a Piece.
 public abstract class Piece {
 	private Square square;
 	private boolean alive;
 	private Team team;
+	private int startingSquareX;
+	private int startingSquareY;
 
 	
-	public Piece(Square square, boolean alive, Team team) {
-		setSquare(square);
+	public Piece(int x, int y, boolean alive, Team team) {
+		setStartingSquareX(x);
+		setStartingSquareY(y);
 		setAlive(alive);
 		setTeam(team);
 	}
@@ -119,4 +124,23 @@ public abstract class Piece {
 		return "Piece [square=" + square + ", alive=" + alive + ", team=" + team + "]";
 	}
 
+	public int getStartingSquareX() {
+		return startingSquareX;
+	}
+
+	public void setStartingSquareX(int startingSquareX) {
+		if (startingSquareX < 0 || startingSquareX > 14)
+			throw new IllegalArgumentException();
+		this.startingSquareX = startingSquareX;
+	}
+
+	public int getStartingSquareY() {
+		return startingSquareY;
+	}
+
+	public void setStartingSquareY(int startingSquareY) {
+		if (startingSquareY < 0 || startingSquareY > 14)
+			throw new IllegalArgumentException();
+		this.startingSquareY = startingSquareY;
+	}
 }

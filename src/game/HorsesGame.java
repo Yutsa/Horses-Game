@@ -1,12 +1,15 @@
 package game;
 
+import board.BoardHorses;
 import board.Square;
+import piece.Piece;
 
 //TODO: Implement Game
 //TODO: Implement the Movement System.
 public class HorsesGame extends Game {
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
+		setBoard(new BoardHorses(this));
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class HorsesGame extends Game {
 	 * @param A
 	 * @return
 	 */
-	Square getPreviousSquare(Square A) {
+	public Square getPreviousSquare(Square A) {
 		int coordX = A.getPosX(), coordY = A.getPosY();
 		if (coordX == 6) {
 			if (coordY == 6) {
@@ -110,5 +113,9 @@ public class HorsesGame extends Game {
 				coordY--;
 		}
 		return getBoard().getSquare(coordX, coordY);
+	}
+	
+	void move(Piece piece) {
+		
 	}
 }
