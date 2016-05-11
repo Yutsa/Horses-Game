@@ -8,7 +8,6 @@ public class StairwaySquare extends Square{
 	
 	public StairwaySquare(int posX, int posY, Team team, Board board, int nbStairway) {
 		super(posX, posY, team, board);
-		// TODO Auto-generated constructor stub
 		setNbStairway(nbStairway);
 	}
 

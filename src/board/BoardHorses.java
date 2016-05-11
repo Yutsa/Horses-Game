@@ -2,7 +2,7 @@ package board;
 
 import game.HorsesGame;
 
-//TODO: Implement BoardHorses.
+//Implement HorsesGame.
 public class BoardHorses extends Board {
 	public BoardHorses(HorsesGame game) {
 		super(15, 15, game);
@@ -96,6 +96,14 @@ public class BoardHorses extends Board {
 		}
 	}
 
+	/**
+	 * Get the coordinates of a free horsepen slot for the team given.
+	 * @param team The team you want a free horspen slot for.
+	 * @return the coordinates of a free horsepen slot for the team given stored in an int[2].
+	 */
+	public int[] getEmptyHorsePenCoord(Team team) {
+		
+	}
 	@Override
 	public String toString() {
 		String board = "";
@@ -115,15 +123,10 @@ public class BoardHorses extends Board {
 				else {
 					board += "-";
 				}
-				/*
-				 * else if (squares[i][j] instanceof HorsePen) { board += "p"; }
-				 * else if (squares[i][j] instanceof BottomStairway) { board +=
-				 * "bo"; } else if () {
-				 * board += "s"; }
-				 */
 			}
 			board += "\n";
 		}
 		return board;
 	}
+
 }

@@ -16,6 +16,13 @@ public abstract class Piece {
 	private boolean alive;
 	private Team team;
 
+	
+	public Piece(Square square, boolean alive, Team team) {
+		setSquare(square);
+		setAlive(alive);
+		setTeam(team);
+	}
+	
 	/**
 	 * Moves the piece.
 	 * 
