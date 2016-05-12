@@ -38,6 +38,7 @@ public class BoardHorses extends Board {
 		for (int y = 9; y < 15; y++) {
 			squares[8][y] = new BasicSquare(8, y, this.getGame().getTeam(3), this);
 		}
+		squares[7][7] = new BasicSquare(7, 7, this.getGame().getTeam(3), this);
 	}
 
 	public void createHorsePen() {
@@ -53,12 +54,12 @@ public class BoardHorses extends Board {
 			}
 		}
 		for (int i = 0; i < 6; i++) {
-			for (int j = 8; j < 15; j++) {
+			for (int j = 9; j < 15; j++) {
 				squares[i][j] = new HorsePen(i, j, this.getGame().getTeam(2), this);
 			}
 		}
 		for (int i = 9; i < 15; i++) {
-			for (int j = 8; j < 15; j++) {
+			for (int j = 9; j < 15; j++) {
 				squares[i][j] = new HorsePen(i, j, this.getGame().getTeam(3), this);
 			}
 		}
@@ -102,12 +103,15 @@ public class BoardHorses extends Board {
 		Square[][] squares = this.getBoard();
 		for (int x = 0; x < this.getHeight(); x++) {
 			for (int y = 0; y < this.getWidth(); y++) {
-				if (squares[y][x] instanceof BasicSquare) {
-					board += "b";
+				if (!squares[y][x].isEmpty()) {
+					board += "♞";
+				}
+				else if (squares[y][x] instanceof BasicSquare) {
+					board += "◌";
 				} else if (squares[y][x] instanceof HorsePen) {
-					board += "p";
+					board += "◉";
 				} else if (squares[y][x] instanceof BottomStairway) {
-					board += "o";
+					board += "◍";
 				} else if (squares[y][x] instanceof StairwaySquare){
 					StairwaySquare s = (StairwaySquare) squares[y][x];
 					board += s.getNbStairway();

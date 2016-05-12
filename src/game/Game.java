@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import board.Board;
 import dice.Dice;
+import piece.Horse;
+import piece.Piece;
 import team.Team;
 
 public abstract class Game {
@@ -17,6 +19,10 @@ public abstract class Game {
 	public Board getBoard() {
 		return board;
 	}
+	
+	public ArrayList<Team> getTeams() {
+		return teams;
+	}
 
 	public void setBoard(Board board) {
 		if (board == null)
@@ -27,12 +33,12 @@ public abstract class Game {
 
 	public Game(int nbTeam, int nbPiece) {
 		setNbTeam(nbTeam);
+		setNbPiece(nbPiece);
 		teams = new ArrayList<Team>();
 		for (int i = 1; i <= getNbTeam(); i++)
 		{
-			teams.add(createTeam(i, this));
+			addTeam((createTeam(i, this)));
 		}
-		setNbPiece(nbPiece);
 	}
 
 	public void setNbTeam(int nbTeam) {
@@ -81,7 +87,7 @@ public abstract class Game {
 	}
 
 	public Team getTeam(int i) {
-		if (i < 0)
+		if (i < 0 || i > teams.size())
 			throw new IllegalArgumentException();
 		return teams.get(i);
 	}
@@ -89,6 +95,7 @@ public abstract class Game {
 	public Team createTeam(int color, Game game) {
 		return new Team(color, game);
 	}
+	
 	
 	public abstract void runGame();
 

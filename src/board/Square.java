@@ -45,8 +45,6 @@ public abstract class Square {
 	 *            The Piece to put on the Square.
 	 */
 	public void setPieceOnSquare(Piece piece) {
-		if (piece == null)
-			throw new IllegalArgumentException();
 		pieceOnSquare = piece;
 	}
 

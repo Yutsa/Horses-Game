@@ -12,7 +12,7 @@ import team.Team;
  * @author Édouard WILLISSECK
  */
 
-//TODO: Give a starting square to a Piece.
+// TODO: Give a starting square to a Piece.
 public abstract class Piece {
 	private Square square;
 	private boolean alive;
@@ -20,12 +20,13 @@ public abstract class Piece {
 	private int startingSquareX;
 	private int startingSquareY;
 
-	
+	// TODO: Solve issue: the square doesn't have the piece on it.
 	public Piece(int x, int y, boolean alive, Team team) {
 		setStartingSquareX(x);
 		setStartingSquareY(y);
 		setAlive(alive);
 		setTeam(team);
+		setSquare(team.getGame().getBoard().getSquare(x, y));
 	}
 
 	/**
@@ -51,6 +52,7 @@ public abstract class Piece {
 			throw new IllegalArgumentException("Case d'une autre équipe.");
 		}
 		this.square = square;
+		square.setPieceOnSquare(this);
 	}
 
 	/**
@@ -65,7 +67,8 @@ public abstract class Piece {
 	/**
 	 * Set the living status of the Piece.
 	 * 
-	 * @param alive A boolean representing whether or not the cell is alive.
+	 * @param alive
+	 *            A boolean representing whether or not the cell is alive.
 	 */
 	public void setAlive(boolean alive) {
 		this.alive = alive;
@@ -83,12 +86,14 @@ public abstract class Piece {
 	/**
 	 * Set the team of the Piece
 	 * 
-	 * @param team the Team of the Piece.
+	 * @param team
+	 *            the Team of the Piece.
 	 */
 	public void setTeam(Team team) {
 		if (team == null)
 			throw new IllegalArgumentException("Paramètre null.");
 		this.team = team;
+		team.addPiece(this);
 	}
 
 	@Override

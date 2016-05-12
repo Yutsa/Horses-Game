@@ -16,7 +16,6 @@ import piece.Piece;
 public class Team {
 	private int color;
 	private Game game;
-	private Game game;
 	private ArrayList<Piece> pieces;
 
 	
@@ -33,15 +32,10 @@ public class Team {
 		setGame(game2);
 		setColor(color);
 		pieces = new ArrayList<Piece>();
-		for (int i = 1; i <= getNbPieces(); i++)
-		{
-			pieces.add(createPieces(i, this));
-		}
 	}
 
 	public Piece createPieces(int x, int y, boolean alive, Team team) {
 		return new Horse(x, y, alive, team);
-		
 	}
 	/**
 	 * Gets the game being played by the team.
@@ -92,7 +86,7 @@ public class Team {
 	 * @return The piece at index i
 	 */
 	public Piece getPiece(int i) {
-		if (i < 0)
+		if (i < 0 || i > pieces.size())
 			throw new IllegalArgumentException();
 		return pieces.get(i);
 	}

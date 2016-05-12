@@ -21,11 +21,14 @@ abstract class Game {
 }
 
 class HorsesGame {
-+getNextSquare(Square square)
-+getPreviousSquare(Square square)
-+moveForward(Piece piece, int nbDeplacement, boolean moveStairway)
-+moveBackward(Piece piece, int nbDeplacement, boolean moveStairway)
++getNextSquare(Square square) : Square
++getPreviousSquare(Square square) : Square
++getNextStairway(Square square) : Square
++moveForward(Piece piece, int nbDeplacement) throws PathBlockedException
++moveBackward(Piece piece, int nbDeplacement) throws PathBlockedException
 +killPiece(Piece killer, Piece killed)
++moveFromHorsePen(Piece piece, Square pieceSquare, Square startSquare)
++moveToStairway(Piece piece, int nbDeplacement)
 }
 
 
