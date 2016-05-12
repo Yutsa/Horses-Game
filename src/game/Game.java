@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 
 import board.Board;
+import dice.Dice;
 import team.Team;
 
 public abstract class Game {
@@ -10,6 +11,8 @@ public abstract class Game {
 	private int nbTeam;
 	private int nbPiece;
 	private Board board;
+	private ArrayList<Team> teams;
+	private Dice dice;
 	
 	public Board getBoard() {
 		return board;
@@ -21,7 +24,6 @@ public abstract class Game {
 		this.board = board;
 	}
 
-	private ArrayList<Team> teams;
 
 	public Game(int nbTeam, int nbPiece) {
 		setNbTeam(nbTeam);
@@ -87,5 +89,7 @@ public abstract class Game {
 	public Team createTeam(int color, Game game) {
 		return new Team(color, game);
 	}
+	
+	public abstract void runGame();
 
 }

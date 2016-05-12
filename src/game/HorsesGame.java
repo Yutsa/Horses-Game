@@ -9,8 +9,6 @@ import exceptions.PathBlockedException;
 import piece.Piece;
 import sun.reflect.generics.tree.BottomSignature;
 
-//TODO: Implement Game
-//TODO: Implement the Movement System.
 public class HorsesGame extends Game {
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
@@ -126,6 +124,7 @@ public class HorsesGame extends Game {
 		return getBoard().getSquare(coordX, coordY);
 	}
 
+	//TODO: Implement moveForward
 	public void moveForward(Piece piece, int nbDeplacement, boolean moveStairway) throws PathBlockedException {
 		if (nbDeplacement <= 0)
 			return;
@@ -172,6 +171,12 @@ public class HorsesGame extends Game {
 	}
 
 	public void killPiece() {
-		// TODO Auto-generated method stub
+		// TODO Implement killPiece
+	}
+
+	//TODO: Implement runGame()
+	@Override
+	public void runGame() {
+		
 	}
 }

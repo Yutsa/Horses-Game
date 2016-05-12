@@ -2,7 +2,6 @@ package board;
 
 import team.Team;
 
-//TODO: Implement StairwaySquare.
 public class StairwaySquare extends Square{
 	private int nbStairway;
 	

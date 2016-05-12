@@ -16,6 +16,7 @@ import piece.Piece;
 public class Team {
 	private int color;
 	private Game game;
+	private Game game;
 	private ArrayList<Piece> pieces;
 
 	
@@ -38,7 +39,6 @@ public class Team {
 		}
 	}
 
-	//TODO: Implement this.
 	public Piece createPieces(int x, int y, boolean alive, Team team) {
 		return new Horse(x, y, alive, team);
 		

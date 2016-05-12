@@ -1,0 +1,90 @@
+@startuml
+abstract class Board {
+-height : int
+-width : int
++getSquare(x : int, y : int) : Square
+}
+
+class BoardHorses {
++createBasicSquares()
++createStairwaySquares()
++createHorsePen()
++createBottomStairway()
+}
+
+abstract class Game {
+-nbTeam : int
+-nbPiece : int
+{abstract}+runGame()
++getTeam() : Team
++createTeam()
+}
+
+class HorsesGame {
++getNextSquare(Square square)
++getPreviousSquare(Square square)
++moveForward(Piece piece, int nbDeplacement, boolean moveStairway)
++moveBackward(Piece piece, int nbDeplacement, boolean moveStairway)
++killPiece(Piece killer, Piece killed)
+}
+
+
+class PathBlockedException{
+}
+
+class Dice {
+-minimum : int
+-maximum : int
++roll() : int
+}
+
+abstract class Piece {
+-alive : boolean
+-startingSquareX : int
+-startingSquareY : int
+}
+
+abstract Square {
+-posX: int
+-posY: int
++isEmpty() : boolean
+}
+
+class Horse {
+}
+
+class HorsePen {
+}
+
+class StairwaySquare {
+-stairwayNumber : int
+}
+
+class BottomStairway {
+}
+
+class BasicSquare {
+}
+
+class Team {
+-color
++createPieces(int x, int y, boolean alive, Team team) : Piece
++hasPiecesLeft() : boolean
+}
+
+Piece <|-- Horse
+Square <|-- HorsePen
+Square <|-- StairwaySquare
+Square <|-- BottomStairway
+Square <|-- BasicSquare
+Board <|-- BoardHorses
+Game <|-- HorsesGame
+Board "1" *-- "* -squares" Square
+Game "1" *--> "1 -dice" Dice 
+Game "1" *--> "1 -board" Board
+Game "1" *--> "2..* -teams" Team
+Piece "0..4 -pieces"-- "1 -team" Team
+PathBlockedException o-- "2" Piece
+Square "1 square" -- "0..1 piecesOnSquare" Piece
+Square --> "1" Team : -team
+@enduml
