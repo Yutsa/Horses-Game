@@ -8,6 +8,7 @@ import board.Square;
 import exceptions.PathBlockedException;
 import piece.Piece;
 import sun.reflect.generics.tree.BottomSignature;
+import team.Team;
 
 public class HorsesGame extends Game {
 	public HorsesGame(int nbTeam, int nbPiece) {
@@ -22,6 +23,7 @@ public class HorsesGame extends Game {
 
 	/**
 	 * Return the next Square, excluding the horsepen.
+	 * 
 	 * @param A
 	 * @return
 	 */
@@ -74,6 +76,7 @@ public class HorsesGame extends Game {
 
 	/**
 	 * Returns the previous Square not including the horspen.
+	 * 
 	 * @param A
 	 * @return
 	 */
@@ -124,59 +127,111 @@ public class HorsesGame extends Game {
 		return getBoard().getSquare(coordX, coordY);
 	}
 
-	//TODO: Implement moveForward
+	// TODO: Implement moveForward
+	/**
+	 * Move a {@link Piece}forward. If the piece is in a HorsePen move the Piece to its starting Square.
+	 * If another Piece is already on it, check its team and either kill him if it's from another Team
+	 * or throw a {@link PathBlockedException} if it's from the Piece's {@link Team}
+	 * @param piece
+	 * @param nbDeplacement
+	 * @param moveStairway
+	 * @throws PathBlockedException
+	 */
 	public void moveForward(Piece piece, int nbDeplacement, boolean moveStairway) throws PathBlockedException {
 		if (nbDeplacement <= 0)
 			return;
+
 		Square pieceSquare = piece.getSquare();
-		int posX = pieceSquare.getPosX();
-		int posY = pieceSquare.getPosY();
 		Board board = piece.getSquare().getBoard();
+		Square startSquare = null;
+		Piece pieceBlocking = null;
+
 		if (pieceSquare instanceof HorsePen) {
 			switch (piece.getTeam().getColor()) {
 			case 1:
-				piece.setSquare(board.getSquare(0, 6));
-				nbDeplacement--;
-				moveForward(piece, nbDeplacement, false);
+				startSquare = board.getSquare(0, 6);
+				pieceBlocking = startSquare.getPieceOnSquare();
+				
+				if (!startSquare.isEmpty()) {
+					if (pieceBlocking.getTeam().equals(piece.getTeam()))
+						throw new PathBlockedException();
+					else {
+						killPiece(piece, startSquare.getPieceOnSquare());
+					}
+				}
+				piece.setSquare(startSquare);
+				pieceSquare.setPieceOnSquare(null);
+				moveForward(piece, nbDeplacement--, false);
 				break;
 			case 2:
+				startSquare = board.getSquare(8, 0);
+				pieceBlocking = startSquare.getPieceOnSquare();
+				
+				if (!startSquare.isEmpty()) {
+					if (pieceBlocking.getTeam().equals(piece.getTeam()))
+						throw new PathBlockedException();
+					else {
+						killPiece(piece, startSquare.getPieceOnSquare());
+					}
+				}
 				piece.setSquare(board.getSquare(8, 0));
-				nbDeplacement--;
-				moveForward(piece, nbDeplacement, false);
+				pieceSquare.setPieceOnSquare(null);
+				moveForward(piece, nbDeplacement--, false);
 				break;
 			case 3:
+				startSquare = board.getSquare(6, 14);
+				pieceBlocking = startSquare.getPieceOnSquare();
+				
+				if (!startSquare.isEmpty()) {
+					if (pieceBlocking.getTeam().equals(piece.getTeam()))
+						throw new PathBlockedException();
+					else {
+						killPiece(piece, startSquare.getPieceOnSquare());
+					}
+				}
 				piece.setSquare(board.getSquare(6, 14));
-				nbDeplacement--;
-				moveForward(piece, nbDeplacement, false);
+				pieceSquare.setPieceOnSquare(null);
+				moveForward(piece, nbDeplacement--, false);
 				break;
 			case 4:
+				startSquare = board.getSquare(14, 8);
+				pieceBlocking = startSquare.getPieceOnSquare();
+				
+				if (!startSquare.isEmpty()) {
+					if (pieceBlocking.getTeam().equals(piece.getTeam()))
+						throw new PathBlockedException();
+					else {
+						killPiece(piece, startSquare.getPieceOnSquare());
+					}
+				}
+				
 				piece.setSquare(board.getSquare(14, 8));
-				nbDeplacement--;
-				moveForward(piece, nbDeplacement, false);
+				pieceSquare.setPieceOnSquare(null);
+				moveForward(piece, nbDeplacement--, false);
 				break;
 			}
 		}
-		
+
 		if (pieceSquare instanceof BottomStairway && nbDeplacement > 0 && !moveStairway) {
 			piece.setSquare(getPreviousSquare(pieceSquare));
+			pieceSquare.setPieceOnSquare(null);
 			moveBackward(piece, nbDeplacement--);
 		}
-		
-		
-	}
-	
-	//TODO: Implement moveBackward
-	public void moveBackward(Piece piece, int nbDeplacement) {
-		
+
 	}
 
-	public void killPiece() {
+	// TODO: Implement moveBackward
+	public void moveBackward(Piece piece, int nbDeplacement) {
+
+	}
+
+	public void killPiece(Piece killer, Piece killed) {
 		// TODO Implement killPiece
 	}
 
-	//TODO: Implement runGame()
+	// TODO: Implement runGame()
 	@Override
 	public void runGame() {
-		
+
 	}
 }
