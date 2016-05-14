@@ -1,5 +1,7 @@
 package game;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Accessor.GetterOnlyReflection;
+
 import board.BasicSquare;
 import board.Board;
 import board.BoardHorses;
@@ -328,7 +330,14 @@ public class HorsesGame extends Game {
 	 * @param killed
 	 */
 	public void killPiece(Piece killer, Piece killed) {
-		// TODO Implement killPiece
+		if (killer == null || killed == null || (killer == killed))
+			throw new IllegalArgumentException();
+		Square square = killed.getSquare();
+		killed.setSquare(getBoard().getSquare(killed.getStartingSquareX(), killed.getStartingSquareY()));
+		killer.getSquare().setPieceOnSquare(null);
+		killer.setSquare(square);
+		System.out.println("A piece has been killed !");
+
 	}
 
 	public Horse createPieces(int x, int y, boolean alive, Team team) {
@@ -355,110 +364,33 @@ public class HorsesGame extends Game {
 		System.out.println(game.getBoard().toString());
 		Piece p = game.getTeam(0).getPiece(2);
 		Team team = game.getTeam(1);
-		// Piece other = game.createPieces(3, 6, true, team); // Uncomment to
+		Piece p2 = game.getTeam(1).getPiece(2);
+		p2.getSquare().setPieceOnSquare(null);
+		p2.setSquare(game.getBoard().getSquare(3, 6));
 		// put another piece on the board that will
 		// block the deplacement.
 
-		for (int i = 0; i < 10; i++) {
+		try {
+			if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p))
+				game.moveToStairway(p, 1);
+			else {
+				game.moveForward(p, 6);
+			}
+		} catch (PathBlockedException e) {
+			System.out.println("Mouvement impossible");
+		}
+		System.out.println(game.getBoard().toString());
+		try {
+			if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p))
+				game.moveToStairway(p, 1);
+			else {
+				game.moveForward(p, 3);
+			}
+		} catch (PathBlockedException e) {
+			System.out.println("Mouvement impossible");
+		}
+		System.out.println(game.getBoard().toString());
 
-			try {
-				if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p))
-					game.moveToStairway(p, 1);
-				else {
-					game.moveForward(p, 6);
-				}
-			} catch (PathBlockedException e) {
-				System.out.println("Mouvement impossible");
-			}
-			System.out.println(game.getBoard().toString());
-		}
-		try {
-			if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p))
-				game.moveToStairway(p, 1);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p))
-				game.moveToStairway(p, 1);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			if ((p.getSquare() instanceof BottomStairway || p.getSquare() instanceof StairwaySquare)
-					&& game.isPiecesStairway(p))
-				game.moveToStairway(p, 2);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			if ((p.getSquare() instanceof BottomStairway || p.getSquare() instanceof StairwaySquare)
-					&& game.isPiecesStairway(p))
-				game.moveToStairway(p, 3);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			if ((p.getSquare() instanceof BottomStairway || p.getSquare() instanceof StairwaySquare)
-					&& game.isPiecesStairway(p))
-				game.moveToStairway(p, 4);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			if ((p.getSquare() instanceof BottomStairway || p.getSquare() instanceof StairwaySquare)
-					&& game.isPiecesStairway(p))
-				game.moveToStairway(p, 5);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			if ((p.getSquare() instanceof BottomStairway || p.getSquare() instanceof StairwaySquare)
-					&& game.isPiecesStairway(p))
-				game.moveToStairway(p, 6);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			if ((p.getSquare() instanceof BottomStairway || p.getSquare() instanceof StairwaySquare)
-					&& game.isPiecesStairway(p))
-				game.moveToStairway(p, 6);
-			else {
-				game.moveForward(p, 1);
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		System.out.println("Il vous reste " + game.getTeam(0).getNbPieces() + " chevaux.");
 	}
 
 }
