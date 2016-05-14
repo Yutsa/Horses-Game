@@ -1,5 +1,6 @@
 package game;
 
+import board.BasicSquare;
 import board.Board;
 import board.BoardHorses;
 import board.BottomStairway;
@@ -15,23 +16,24 @@ public class HorsesGame extends Game {
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
 		setBoard(new BoardHorses(this));
+		addPiecesToTeams();
+	}
+
+	public void addPiecesToTeams() {
 		for (Team t : getTeams()) {
 			if (t.getColor() == 1) {
 				for (int i = 0; i < getNbPieces(); i++) {
 					t.addPiece(createPieces(i, 0, true, t));
 				}
-			}
-			else if (t.getColor() == 2) {
+			} else if (t.getColor() == 2) {
 				for (int i = 9; i < 9 + getNbPieces(); i++) {
 					t.addPiece(createPieces(i, 0, true, t));
 				}
-			}
-			else if (t.getColor() == 3) {
+			} else if (t.getColor() == 3) {
 				for (int i = 0; i < getNbPieces(); i++) {
 					t.addPiece(createPieces(i, 14, true, t));
 				}
-			}
-			else {
+			} else {
 				for (int i = 9; i < 9 + getNbPieces(); i++) {
 					t.addPiece(createPieces(i, 14, true, t));
 				}
@@ -167,7 +169,7 @@ public class HorsesGame extends Game {
 		Square pieceSquare = piece.getSquare();
 		Board board = piece.getSquare().getBoard();
 
-		if (pieceSquare instanceof HorsePen) {
+		if (pieceSquare instanceof HorsePen && nbDeplacement == 6) {
 			switch (piece.getTeam().getColor()) {
 			case 1:
 				moveFromHorsePen(piece, pieceSquare, board.getSquare(0, 6));
@@ -184,24 +186,26 @@ public class HorsesGame extends Game {
 			}
 		}
 
-		if (pieceSquare instanceof BottomStairway && nbDeplacement > 0
+		else if (pieceSquare instanceof BottomStairway && nbDeplacement > 0
 				&& pieceSquare.getTeam().equals(piece.getTeam())) {
 			piece.setSquare(getPreviousSquare(pieceSquare));
 			pieceSquare.setPieceOnSquare(null);
-			moveBackward(piece, nbDeplacement--);
+			moveBackward(piece, --nbDeplacement);
 		}
 
-		else {
+		else if (pieceSquare instanceof BasicSquare
+				|| (pieceSquare instanceof BottomStairway && !pieceSquare.getTeam().equals(piece.getTeam()))) {
 			Square nextSquare = getNextSquare(pieceSquare);
 			if (!nextSquare.isEmpty()) {
 				if (nextSquare.getPieceOnSquare().getTeam().equals(piece.getTeam()))
 					throw new PathBlockedException();
 				else
 					killPiece(piece, nextSquare.getPieceOnSquare());
+			} else {
+				pieceSquare.setPieceOnSquare(null);
+				piece.setSquare(nextSquare);
+				moveForward(piece, --nbDeplacement);
 			}
-
-			piece.setSquare(getNextSquare(pieceSquare));
-			pieceSquare.setPieceOnSquare(null);
 		}
 
 	}
@@ -272,21 +276,22 @@ public class HorsesGame extends Game {
 
 	public static void test() {
 		HorsesGame game = new HorsesGame(4, 4);
-		// Team team = new Team(1, game);
 		System.out.println(game.getBoard().toString());
 		Piece p = game.getTeam(0).getPiece(1);
-		try {
-			game.moveForward(p, 6);
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
-		try {
-			game.moveForward(p, 6);
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		System.out.println(game.getBoard().toString());
+		for (int i = 0; i < 10; i++) {
 
+			try {
+				game.moveForward(p, 6);
+			} catch (PathBlockedException e) {
+				System.out.println("Mouvement impossible");
+			}
+			System.out.println(game.getBoard().toString());
+		}
+		try {
+			game.moveForward(p, 3);
+		} catch (PathBlockedException e) {
+			System.out.println("Mouvement impossible");
+		}
+		System.out.println(game.getBoard().toString());
 	}
 }
