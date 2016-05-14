@@ -15,11 +15,20 @@ public abstract class Game {
 	private Board board;
 	private ArrayList<Team> teams;
 	private Dice dice;
-	
+
+	public Game(int nbTeam, int nbPiece) {
+		setNbTeam(nbTeam);
+		setNbPiece(nbPiece);
+		teams = new ArrayList<Team>();
+		for (int i = 1; i <= getNbTeam(); i++) {
+			addTeam((createTeam(i, this)));
+		}
+	}
+
 	public Board getBoard() {
 		return board;
 	}
-	
+
 	public ArrayList<Team> getTeams() {
 		return teams;
 	}
@@ -30,30 +39,19 @@ public abstract class Game {
 		this.board = board;
 	}
 
-
-	public Game(int nbTeam, int nbPiece) {
-		setNbTeam(nbTeam);
-		setNbPiece(nbPiece);
-		teams = new ArrayList<Team>();
-		for (int i = 1; i <= getNbTeam(); i++)
-		{
-			addTeam((createTeam(i, this)));
-		}
-	}
-
 	public void setNbTeam(int nbTeam) {
 		if (nbTeam < 1)
 			throw new IllegalArgumentException();
 		this.nbTeam = nbTeam;
 	}
 
-	
 	public int getNbTeam() {
 		return nbTeam;
 	}
 
 	/**
 	 * Get the number of pieces per Team.
+	 * 
 	 * @return the number of pieces per Team.
 	 */
 	public int getNbPieces() {
@@ -95,8 +93,7 @@ public abstract class Game {
 	public Team createTeam(int color, Game game) {
 		return new Team(color, game);
 	}
-	
-	
+
 	public abstract void runGame();
 
 }

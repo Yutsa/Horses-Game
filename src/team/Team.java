@@ -8,7 +8,7 @@ import piece.Horse;
 import piece.Piece;
 
 /**
- * A class reprenseting a team for a board game.
+ * A class representing a team for a board game.
  * 
  * @author Édouard WILLISSECK
  *

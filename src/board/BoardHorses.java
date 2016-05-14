@@ -38,7 +38,6 @@ public class BoardHorses extends Board {
 		for (int y = 9; y < 15; y++) {
 			squares[8][y] = new BasicSquare(8, y, this.getGame().getTeam(3), this);
 		}
-		squares[7][7] = new BasicSquare(7, 7, this.getGame().getTeam(3), this);
 	}
 
 	public void createHorsePen() {
@@ -95,6 +94,7 @@ public class BoardHorses extends Board {
 			squares[7][i] = new StairwaySquare(7, i, this.getGame().getTeam(3), this, j);
 			j++;
 		}
+		squares[7][7] = new StairwaySquare(7, 7, this.getGame().getTeam(0), this, 1);
 	}
 
 	@Override
