@@ -21,6 +21,21 @@ public class HorsesGame extends Game {
 					t.addPiece(createPieces(i, 0, true, t));
 				}
 			}
+			else if (t.getColor() == 2) {
+				for (int i = 9; i < 9 + getNbPieces(); i++) {
+					t.addPiece(createPieces(i, 0, true, t));
+				}
+			}
+			else if (t.getColor() == 3) {
+				for (int i = 0; i < getNbPieces(); i++) {
+					t.addPiece(createPieces(i, 14, true, t));
+				}
+			}
+			else {
+				for (int i = 9; i < 9 + getNbPieces(); i++) {
+					t.addPiece(createPieces(i, 14, true, t));
+				}
+			}
 		}
 	}
 
@@ -175,7 +190,7 @@ public class HorsesGame extends Game {
 			pieceSquare.setPieceOnSquare(null);
 			moveBackward(piece, nbDeplacement--);
 		}
-		
+
 		else {
 			Square nextSquare = getNextSquare(pieceSquare);
 			if (!nextSquare.isEmpty()) {
@@ -184,7 +199,7 @@ public class HorsesGame extends Game {
 				else
 					killPiece(piece, nextSquare.getPieceOnSquare());
 			}
-			
+
 			piece.setSquare(getNextSquare(pieceSquare));
 			pieceSquare.setPieceOnSquare(null);
 		}
@@ -205,16 +220,16 @@ public class HorsesGame extends Game {
 		Piece pieceBlocking = startSquare.getPieceOnSquare();
 
 		if (!startSquare.isEmpty()) {
+
 			if (pieceBlocking.getTeam().equals(piece.getTeam()))
 				throw new PathBlockedException();
 			else {
 				killPiece(piece, startSquare.getPieceOnSquare());
 			}
-		}
-		else {
+		} else {
 			piece.getSquare().setPieceOnSquare(null);
 			piece.setSquare(startSquare);
-			
+
 		}
 	}
 
@@ -248,16 +263,16 @@ public class HorsesGame extends Game {
 	public Horse createPieces(int x, int y, boolean alive, Team team) {
 		return new Horse(x, y, alive, team);
 	}
-	
+
 	// TODO: Implement runGame()
 	@Override
 	public void runGame() {
 
 	}
-	
+
 	public static void test() {
 		HorsesGame game = new HorsesGame(4, 4);
-//		Team team = new Team(1, game);
+		// Team team = new Team(1, game);
 		System.out.println(game.getBoard().toString());
 		Piece p = game.getTeam(0).getPiece(1);
 		try {
@@ -272,6 +287,6 @@ public class HorsesGame extends Game {
 			System.out.println("Mouvement impossible");
 		}
 		System.out.println(game.getBoard().toString());
-		
+
 	}
 }
