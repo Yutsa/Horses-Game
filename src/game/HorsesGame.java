@@ -197,10 +197,10 @@ public class HorsesGame extends Game {
 				|| (pieceSquare instanceof BottomStairway && !pieceSquare.getTeam().equals(piece.getTeam()))) {
 			Square nextSquare = getNextSquare(pieceSquare);
 			if (!nextSquare.isEmpty()) {
-				if (nextSquare.getPieceOnSquare().getTeam().equals(piece.getTeam()))
-					throw new PathBlockedException();
-				else
+				if (nbDeplacement == 1)
 					killPiece(piece, nextSquare.getPieceOnSquare());
+				else
+					throw new PathBlockedException();
 			} else {
 				pieceSquare.setPieceOnSquare(null);
 				piece.setSquare(nextSquare);
@@ -238,8 +238,27 @@ public class HorsesGame extends Game {
 	}
 
 	// TODO: Implement moveBackward
-	public void moveBackward(Piece piece, int nbDeplacement) {
+	public void moveBackward(Piece piece, int nbDeplacement) throws PathBlockedException {
+		if (nbDeplacement <= 0)
+			return;
 
+		Square pieceSquare = piece.getSquare();
+		Board board = piece.getSquare().getBoard();
+		Square previousSquare = getPreviousSquare(pieceSquare);
+
+		if (!previousSquare.isEmpty()) {
+			if (nbDeplacement == 1) {
+				killPiece(piece, previousSquare.getPieceOnSquare());
+			}
+			else {
+				throw new PathBlockedException();
+			}
+		} else {
+			pieceSquare.setPieceOnSquare(null);
+			piece.setSquare(previousSquare);
+			moveBackward(piece, --nbDeplacement);
+		}
+		
 	}
 
 	/**
