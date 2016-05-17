@@ -35,9 +35,10 @@ public abstract class Game {
 	}
 	
 	public void nextTeam() {
-		if (currentTeam == teams.size())
+		if (currentTeam == teams.size() - 1)
 			currentTeam = 0;
-		currentTeam++;
+		else 
+			currentTeam++;
 	}
 	
 	public Board getBoard() {

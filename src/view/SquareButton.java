@@ -61,8 +61,6 @@ public class SquareButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println(square.getPosX() + " & " + square.getPosY());
-
 		if (!square.isEmpty() && game.getDiceResult() != 0 && square.getPieceOnSquare().getTeam().equals(game.getCurrentTeam())) {
 			Piece p = square.getPieceOnSquare();
 
@@ -78,7 +76,7 @@ public class SquareButton extends JButton implements ActionListener {
 			}
 			game.setDiceResult(0);
 			boardPanel.displayBoard();
+			game.nextTeam();
 		}
-		game.nextTeam();
 	}
 }

@@ -31,7 +31,7 @@ public class MenuPanel extends JPanel {
 		JLabel label = new JLabel("MENU");
 		JButton diceButton = new JButton("Lancer Dédé");
 		diceResult = new JLabel();
-		teamLabel = new JLabel("Au tour de l'équipe 1.");
+		teamLabel = new JLabel("Au tour de l'équipe 0.");
 		DiceListener diceListener = new DiceListener();
 		
 		diceButton.addActionListener(diceListener);
