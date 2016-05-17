@@ -7,20 +7,36 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import board.BottomStairway;
 import board.Square;
-import game.Game;
+import board.StairwaySquare;
+import exceptions.PathBlockedException;
+import game.HorsesGame;
+import piece.Piece;
 
-public class SquareButton extends JButton implements ActionListener{
+public class SquareButton extends JButton implements ActionListener {
 	private Square square;
-	private Game game;
-	
-	public SquareButton(Square square, ImageIcon img, Game game) {
+	private HorsesGame game;
+	private BoardPanel boardPanel;
+
+	public SquareButton(Square square, ImageIcon img, HorsesGame game2, BoardPanel boardPanel) {
 		super(img);
+		setBoardPanel(boardPanel);
 		setSquare(square);
-		setGame(game);
+		setGame(game2);
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setContentAreaFilled(false);
 		this.addActionListener(this);
+	}
+
+	public BoardPanel getBoardPanel() {
+		return boardPanel;
+	}
+
+	public void setBoardPanel(BoardPanel boardPanel) {
+		if (boardPanel == null)
+			throw new IllegalArgumentException();
+		this.boardPanel = boardPanel;
 	}
 
 	public Square getSquare() {
@@ -33,12 +49,12 @@ public class SquareButton extends JButton implements ActionListener{
 		this.square = square;
 	}
 
-	public Game getGame() {
+	public HorsesGame getGame() {
 		return game;
 	}
 
-	public void setGame(Game game) {
-		if (game == null) 
+	public void setGame(HorsesGame game) {
+		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;
 	}
@@ -46,6 +62,23 @@ public class SquareButton extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println(square.getPosX() + " & " + square.getPosY());
-		
+
+		if (!square.isEmpty() && game.getDiceResult() != 0 && square.getPieceOnSquare().getTeam().equals(game.getCurrentTeam())) {
+			Piece p = square.getPieceOnSquare();
+
+			try {
+				if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p)
+						|| p.getSquare() instanceof StairwaySquare)
+					game.moveToStairway(p, game.getDiceResult());
+				else {
+					game.moveForward(p, game.getDiceResult());
+				}
+			} catch (PathBlockedException e) {
+				System.out.println("Mouvement impossible");
+			}
+			game.setDiceResult(0);
+			boardPanel.displayBoard();
+		}
+		game.nextTeam();
 	}
 }

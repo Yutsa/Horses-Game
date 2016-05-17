@@ -9,13 +9,14 @@ import javax.swing.JFrame;
 import board.BasicSquare;
 import board.Square;
 import game.Game;
+import game.HorsesGame;
 
 public class View extends JFrame{
-	private Game game;
+	private HorsesGame game;
 	private BoardPanel boardPanel;
 	private MenuPanel menuPanel;
 	
-	public View(Game game) {
+	public View(HorsesGame game) {
 		setGame(game);
 		boardPanel = new BoardPanel(game);
 		menuPanel = new MenuPanel(game, boardPanel);
@@ -31,11 +32,11 @@ public class View extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public Game getGame() {
+	public HorsesGame getGame() {
 		return game;
 	}
 
-	public void setGame(Game game) {
+	public void setGame(HorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;

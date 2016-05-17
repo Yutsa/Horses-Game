@@ -14,6 +14,7 @@ public abstract class Game {
 	private int nbPiece;
 	private Board board;
 	private ArrayList<Team> teams;
+	private int currentTeam = 0;
 	private Dice dice;
 
 	public Game(int nbTeam, int nbPiece) {
@@ -25,6 +26,20 @@ public abstract class Game {
 		}
 	}
 
+	public Team getCurrentTeam() {
+		return teams.get(currentTeam);
+	}
+	
+	public int getCurrentTeamNb() {
+		return currentTeam;
+	}
+	
+	public void nextTeam() {
+		if (currentTeam == teams.size())
+			currentTeam = 0;
+		currentTeam++;
+	}
+	
 	public Board getBoard() {
 		return board;
 	}

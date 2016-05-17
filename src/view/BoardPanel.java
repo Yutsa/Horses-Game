@@ -13,35 +13,40 @@ import board.HorsePen;
 import board.Square;
 import board.StairwaySquare;
 import game.Game;
+import game.HorsesGame;
 
 public class BoardPanel extends JPanel {
-	private Game game;
+	private HorsesGame game;
 	private SquareButton[][] squareButtons;
 
-	public BoardPanel(Game game) {
+	public BoardPanel(HorsesGame game) {
 		super();
 		squareButtons = new SquareButton[15][15];
-		ImageIcon img = new ImageIcon();
-		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 15; j++) {
-				squareButtons[j][i] = new SquareButton(game.getBoard().getSquare(j, i), img, game);
-				this.add(squareButtons[j][i]);
-			}
-		}
+		setUpBoard(game);
 		this.setLayout(new GridLayout(15, 15));
 		setGame(game);
 		displayBoard();
+	}
+
+	public void setUpBoard(HorsesGame game) {
+		ImageIcon img = new ImageIcon();
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				squareButtons[j][i] = new SquareButton(game.getBoard().getSquare(j, i), img, game, this);
+				this.add(squareButtons[j][i]);
+			}
+		}
 	}
 	
 	private SquareButton getSquareButton(int x, int y) {
 		return squareButtons[x][y];
 	}
 
-	public Game getGame() {
+	public HorsesGame getGame() {
 		return game;
 	}
 
-	public void setGame(Game game) {
+	public void setGame(HorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;

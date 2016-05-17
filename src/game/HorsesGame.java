@@ -16,11 +16,20 @@ import view.View;
 
 public class HorsesGame extends Game {
 	private Dice dice = new Dice(1, 6);
+	private int diceResult;
 
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
 		setBoard(new BoardHorses(this));
 		addPiecesToTeams();
+	}
+
+	public int getDiceResult() {
+		return diceResult;
+	}
+
+	public void setDiceResult(int diceResult) {
+		this.diceResult = diceResult;
 	}
 
 	public Dice getDice() {
