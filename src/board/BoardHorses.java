@@ -70,9 +70,9 @@ public class BoardHorses extends Board {
 
 		squares[7][0] = new BottomStairway(7, 0, this.getGame().getTeam(1), this);
 
-		squares[14][7] = new BottomStairway(14, 7, this.getGame().getTeam(2), this);
+		squares[14][7] = new BottomStairway(14, 7, this.getGame().getTeam(3), this);
 
-		squares[7][14] = new BottomStairway(7, 14, this.getGame().getTeam(3), this);
+		squares[7][14] = new BottomStairway(7, 14, this.getGame().getTeam(2), this);
 
 	}
 	
@@ -86,12 +86,12 @@ public class BoardHorses extends Board {
 			squares[7][i] = new StairwaySquare(7, i, this.getGame().getTeam(1), this, i);
 		}
 		for (int i = 13; i > 7; i--) {
-			squares[i][7] = new StairwaySquare(i, 7, this.getGame().getTeam(2), this, j);
+			squares[i][7] = new StairwaySquare(i, 7, this.getGame().getTeam(3), this, j);
 			j++;
 		}
 		j = 1;
 		for (int i = 13; i > 7; i--) {
-			squares[7][i] = new StairwaySquare(7, i, this.getGame().getTeam(3), this, j);
+			squares[7][i] = new StairwaySquare(7, i, this.getGame().getTeam(2), this, j);
 			j++;
 		}
 		squares[7][7] = new StairwaySquare(7, 7, this.getGame().getTeam(0), this, 1);

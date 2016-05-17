@@ -1,7 +1,5 @@
 package game;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.Accessor.GetterOnlyReflection;
-
 import board.BasicSquare;
 import board.Board;
 import board.BoardHorses;
@@ -9,16 +7,24 @@ import board.BottomStairway;
 import board.HorsePen;
 import board.Square;
 import board.StairwaySquare;
+import dice.Dice;
 import exceptions.PathBlockedException;
 import piece.Horse;
 import piece.Piece;
 import team.Team;
+import view.View;
 
 public class HorsesGame extends Game {
+	private Dice dice = new Dice(1, 6);
+
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
 		setBoard(new BoardHorses(this));
 		addPiecesToTeams();
+	}
+
+	public Dice getDice() {
+		return dice;
 	}
 
 	public void addPiecesToTeams() {
@@ -50,6 +56,8 @@ public class HorsesGame extends Game {
 	 * @return
 	 */
 	public Square getNextSquare(Square A) {
+		if (A == null)
+			throw new IllegalArgumentException();
 		int coordX = A.getPosX(), coordY = A.getPosY();
 		if (coordX == 6) {
 			if (coordY == 0) {
@@ -103,6 +111,8 @@ public class HorsesGame extends Game {
 	 * @return
 	 */
 	public Square getPreviousSquare(Square A) {
+		if (A == null)
+			throw new IllegalArgumentException();
 		int coordX = A.getPosX(), coordY = A.getPosY();
 		if (coordX == 6) {
 			if (coordY == 6) {
@@ -158,6 +168,8 @@ public class HorsesGame extends Game {
 	 * @return The next {@link StairwaySquare}
 	 */
 	public Square getNextStairway(Square s) {
+		if (s == null)
+			throw new IllegalArgumentException();
 		int posX = s.getPosX();
 		int posY = s.getPosY();
 
@@ -188,6 +200,8 @@ public class HorsesGame extends Game {
 	 * @throws PathBlockedException
 	 */
 	public void moveForward(Piece piece, int nbDeplacement) throws PathBlockedException {
+		if (piece == null)
+			throw new IllegalArgumentException();
 		if (nbDeplacement <= 0)
 			return;
 
@@ -246,6 +260,8 @@ public class HorsesGame extends Game {
 	 * @throws PathBlockedException
 	 */
 	public void moveFromHorsePen(Piece piece, Square pieceSquare, Square startSquare) throws PathBlockedException {
+		if (piece == null || pieceSquare == null || startSquare == null)
+			throw new IllegalArgumentException();
 		Piece pieceBlocking = startSquare.getPieceOnSquare();
 
 		if (!startSquare.isEmpty()) {
@@ -264,6 +280,8 @@ public class HorsesGame extends Game {
 
 	// TODO: Implement moveBackward
 	public void moveBackward(Piece piece, int nbDeplacement) throws PathBlockedException {
+		if (piece == null)
+			throw new IllegalArgumentException();
 		if (nbDeplacement <= 0)
 			return;
 
@@ -293,6 +311,8 @@ public class HorsesGame extends Game {
 	 * @param nbDeplacement
 	 */
 	public void moveToStairway(Piece piece, int nbDeplacement) throws PathBlockedException {
+		if (piece == null)
+			throw new IllegalArgumentException();
 		Square pieceSquare = piece.getSquare();
 		StairwaySquare current = null;
 		StairwaySquare nextSquare = (StairwaySquare) getNextStairway(pieceSquare);
@@ -341,17 +361,21 @@ public class HorsesGame extends Game {
 	}
 
 	public Horse createPieces(int x, int y, boolean alive, Team team) {
+		if (team == null)
+			throw new IllegalArgumentException();
 		return new Horse(x, y, alive, team);
 	}
 
 	public boolean isPiecesStairway(Piece piece) {
+		if (piece == null)
+			throw new IllegalArgumentException();
 		return piece.getSquare().getTeam().equals(piece.getTeam());
 	}
 
 	// TODO: Implement runGame()
 	@Override
 	public void runGame() {
-
+		View view = new View(this);
 	}
 
 	@Override
