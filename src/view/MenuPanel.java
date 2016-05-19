@@ -17,16 +17,16 @@ import piece.Piece;
 import team.Team;
 
 public class MenuPanel extends JPanel {
-	private HorsesGame game;
+	private GraphicalHorsesGame game;
 	private BoardPanel boardPanel;
 	Dice dice = new Dice(1, 6);
 	private JLabel diceResult;
 	private JLabel teamLabel;
 	
-	public MenuPanel(HorsesGame game, BoardPanel boardPanel) {
+	public MenuPanel(GraphicalHorsesGame game) {
 		super();
 		setGame(game);
-		setBoardPanel(boardPanel);
+		setBoardPanel(game.getBoardPanel());
 		
 		
 		JLabel label = new JLabel("MENU");
@@ -59,10 +59,10 @@ public class MenuPanel extends JPanel {
 	}
 
 
-	public HorsesGame getGame() {
+	public GraphicalHorsesGame getGame() {
 		return game;
 	}
-	public void setGame(HorsesGame game) {
+	public void setGame(GraphicalHorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;
@@ -71,14 +71,16 @@ public class MenuPanel extends JPanel {
 	public class DiceListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			Team team = game.getCurrentTeam();
-			int curr = game.getCurrentTeamNb();
+			Team team = game.getGame().getCurrentTeam();
+			int curr = game.getGame().getCurrentTeamNb();
 			teamLabel.setText("Au tour de l'équipe " + curr);
-			game.setDiceResult(dice.roll());
-			diceResult.setText("Résultat du dé: " + game.getDiceResult());
-			if (game.getDiceResult() != 6 && !team.hasPieceOutsideHorsePen()) {
-				game.setDiceResult(0);
-				game.nextTeam();
+			game.getGame().setDiceResult(dice.roll());
+			diceResult.setText("Résultat du dé: " + game.getGame().getDiceResult());
+			
+			
+			if (game.getGame().getDiceResult() != 6 && !team.hasPieceOutsideHorsePen()) {
+				game.getGame().setDiceResult(0);
+				game.getGame().nextTeam();
 			}
 		}
 	}

@@ -16,10 +16,10 @@ import game.Game;
 import game.HorsesGame;
 
 public class BoardPanel extends JPanel {
-	private HorsesGame game;
+	private GraphicalHorsesGame game;
 	private SquareButton[][] squareButtons;
 
-	public BoardPanel(HorsesGame game) {
+	public BoardPanel(GraphicalHorsesGame game) {
 		super();
 		squareButtons = new SquareButton[15][15];
 		setUpBoard(game);
@@ -28,25 +28,25 @@ public class BoardPanel extends JPanel {
 		displayBoard();
 	}
 
-	public void setUpBoard(HorsesGame game) {
+	public void setUpBoard(GraphicalHorsesGame game) {
 		ImageIcon img = new ImageIcon();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				squareButtons[j][i] = new SquareButton(game.getBoard().getSquare(j, i), img, game, this);
+				squareButtons[j][i] = new SquareButton(game.getGame().getBoard().getSquare(j, i), img, game);
 				this.add(squareButtons[j][i]);
 			}
 		}
 	}
-	
-	private SquareButton getSquareButton(int x, int y) {
+
+	public SquareButton getSquareButton(int x, int y) {
 		return squareButtons[x][y];
 	}
 
-	public HorsesGame getGame() {
+	public GraphicalHorsesGame getGame() {
 		return game;
 	}
 
-	public void setGame(HorsesGame game) {
+	public void setGame(GraphicalHorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;
@@ -58,7 +58,7 @@ public class BoardPanel extends JPanel {
 		ImageIcon img = new ImageIcon();
 		for (i = 0; i < 15; i++) {
 			for (j = 0; j < 15; j++) {
-				Square square = game.getBoard().getSquare(j, i);
+				Square square = game.getGame().getBoard().getSquare(j, i);
 				SquareButton squareB = getSquareButton(j, i);
 				if (square instanceof BasicSquare || square instanceof BottomStairway) {
 					switch (square.getTeam().getColor()) {
@@ -138,7 +138,7 @@ public class BoardPanel extends JPanel {
 					g.drawImage(pion.getImage(), 0, 0, null, null);
 					g.dispose();
 					img = new ImageIcon(combinedImage);
-					
+
 				}
 				squareB.setIcon(img);
 			}

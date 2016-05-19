@@ -14,19 +14,19 @@ import exceptions.PathBlockedException;
 import game.HorsesGame;
 import piece.Piece;
 
-public class SquareButton extends JButton implements ActionListener {
+public class SquareButton extends JButton {
 	private Square square;
-	private HorsesGame game;
+	private GraphicalHorsesGame graphicalHorsesGame;
 	private BoardPanel boardPanel;
 
-	public SquareButton(Square square, ImageIcon img, HorsesGame game2, BoardPanel boardPanel) {
+	public SquareButton(Square square, ImageIcon img, GraphicalHorsesGame game) {
 		super(img);
-		setBoardPanel(boardPanel);
+		setBoardPanel(graphicalHorsesGame.getBoardPanel());
 		setSquare(square);
-		setGame(game2);
+		setGraphicalHorsesGame(game);
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setContentAreaFilled(false);
-		this.addActionListener(this);
+		this.addActionListener(new GraphicalSquareListener());
 	}
 
 	public BoardPanel getBoardPanel() {
@@ -49,21 +49,24 @@ public class SquareButton extends JButton implements ActionListener {
 		this.square = square;
 	}
 
-	public HorsesGame getGame() {
-		return game;
+	public GraphicalHorsesGame getGraphicalHorsesGame() {
+		return graphicalHorsesGame;
 	}
 
-	public void setGame(HorsesGame game) {
+	public void setGraphicalHorsesGame(GraphicalHorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
-		this.game = game;
+		this.graphicalHorsesGame = game;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if (!square.isEmpty() && game.getDiceResult() != 0 && square.getPieceOnSquare().getTeam().equals(game.getCurrentTeam())) {
-			Piece p = square.getPieceOnSquare();
-			game.play(p);
+	public class GraphicalSquareListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if (!square.isEmpty() && graphicalHorsesGame.getGame().getDiceResult() != 0
+					&& square.getPieceOnSquare().getTeam().equals(graphicalHorsesGame.getGame().getCurrentTeam())) {
+				Piece p = square.getPieceOnSquare();
+				graphicalHorsesGame.play(p);
+			}
 		}
 	}
 }

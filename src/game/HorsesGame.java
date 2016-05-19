@@ -13,13 +13,11 @@ import piece.Horse;
 import piece.Piece;
 import team.Team;
 import view.BoardPanel;
-import view.View;
+import view.GraphicalHorsesGame;
 
 public class HorsesGame extends Game {
 	private Dice dice = new Dice(1, 6);
 	private int diceResult;
-	private View view;
-
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
 		setBoard(new BoardHorses(this));
@@ -382,39 +380,6 @@ public class HorsesGame extends Game {
 			throw new IllegalArgumentException();
 		return piece.getSquare().getTeam().equals(piece.getTeam());
 	}
-	
-	public void play(Piece piece) {
-		try {
-			if (piece.getSquare() instanceof BottomStairway && this.isPiecesStairway(piece)
-					|| piece.getSquare() instanceof StairwaySquare)
-				this.moveToStairway(piece, this.getDiceResult());
-			else {
-				this.moveForward(piece, this.getDiceResult());
-			}
-		} catch (PathBlockedException e) {
-			System.out.println("Mouvement impossible");
-		}
-		this.setDiceResult(0);
-		BoardPanel boardPanel = this.getView().getBoardPanel();
-		boardPanel.displayBoard();
-		this.nextTeam();
-	}
-
-	public View getView() {
-		return view;
-	}
-
-	public void setView(View view) {
-		if (view == null)
-			throw new IllegalArgumentException();
-		this.view = view;
-	}
-
-	// TODO: Implement runGame()
-	@Override
-	public void runGame() {
-		view = new View(this);
-	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -453,6 +418,12 @@ public class HorsesGame extends Game {
 		}
 		System.out.println(game.getBoard().toString());
 
+	}
+
+	@Override
+	public void runGame() {
+		// This method is used to run the game in console mode.
+		
 	}
 
 }

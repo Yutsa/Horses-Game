@@ -7,19 +7,23 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import board.BasicSquare;
+import board.BottomStairway;
 import board.Square;
+import board.StairwaySquare;
+import exceptions.PathBlockedException;
 import game.Game;
 import game.HorsesGame;
+import piece.Piece;
 
-public class View extends JFrame{
-	private HorsesGame game;
+public class GraphicalHorsesGame extends JFrame{
+	private HorsesGame game = new HorsesGame(4, 4);
 	private BoardPanel boardPanel;
 	private MenuPanel menuPanel;
 	
-	public View(HorsesGame game) {
+	public GraphicalHorsesGame() {
 		setGame(game);
-		boardPanel = new BoardPanel(game);
-		menuPanel = new MenuPanel(game, boardPanel);
+		boardPanel = new BoardPanel(this);
+		menuPanel = new MenuPanel(this);
 		
 		this.setLayout(new BorderLayout());
 		this.add(boardPanel, BorderLayout.EAST);
@@ -50,5 +54,19 @@ public class View extends JFrame{
 		return menuPanel;
 	}
 	
-	
+	public void play(Piece piece) {
+		try {
+			if (piece.getSquare() instanceof BottomStairway && game.isPiecesStairway(piece)
+					|| piece.getSquare() instanceof StairwaySquare)
+				game.moveToStairway(piece, game.getDiceResult());
+			else {
+				game.moveForward(piece, game.getDiceResult());
+			}
+		} catch (PathBlockedException e) {
+			System.out.println("Mouvement impossible");
+		}
+		game.setDiceResult(0);
+		boardPanel.displayBoard();
+		game.nextTeam();
+	}
 }

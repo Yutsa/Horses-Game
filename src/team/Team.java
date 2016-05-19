@@ -18,6 +18,7 @@ public class Team {
 	private int color;
 	private Game game;
 	private ArrayList<Piece> pieces;
+	private boolean canPlay;
 
 	
 	/**
@@ -137,6 +138,22 @@ public class Team {
 				return true;
 		}
 		return false;
+	}
+	
+	// TODO: Check if a piece is playable bot blocked by another piece.
+	public boolean canPlay(int diceNumber) {
+		if (diceNumber == 6)
+			return true;
+		else 
+			return hasPieceOutsideHorsePen();
+	}
+	
+	public void setCanPlay(boolean b) {
+		this.canPlay = b;
+	}
+	
+	public boolean isPlayable() {
+		return this.canPlay;
 	}
 	/*
 	 * (non-Javadoc)
