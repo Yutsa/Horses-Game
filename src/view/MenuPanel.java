@@ -14,6 +14,7 @@ import dice.Dice;
 import exceptions.PathBlockedException;
 import game.HorsesGame;
 import piece.Piece;
+import team.Team;
 
 public class MenuPanel extends JPanel {
 	private HorsesGame game;
@@ -70,24 +71,15 @@ public class MenuPanel extends JPanel {
 	public class DiceListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			Team team = game.getCurrentTeam();
 			int curr = game.getCurrentTeamNb();
 			teamLabel.setText("Au tour de l'équipe " + curr);
 			game.setDiceResult(dice.roll());
 			diceResult.setText("Résultat du dé: " + game.getDiceResult());
-			
-//			Piece p = game.getTeam(curr).getPiece(2);
-//			diceResult.setText("Résultat du dé: " + game.getDiceResult());
-//			
-//			try {
-//				if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p) || p.getSquare() instanceof StairwaySquare)
-//					game.moveToStairway(p, game.getDiceResult());
-//				else {
-//					game.moveForward(p, game.getDiceResult());
-//				}
-//			} catch (PathBlockedException e) {
-//				System.out.println("Mouvement impossible");
-//			}
-//			boardPanel.displayBoard();
+			if (game.getDiceResult() != 6 && !team.hasPieceOutsideHorsePen()) {
+				game.setDiceResult(0);
+				game.nextTeam();
+			}
 		}
 	}
 

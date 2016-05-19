@@ -380,6 +380,22 @@ public class HorsesGame extends Game {
 			throw new IllegalArgumentException();
 		return piece.getSquare().getTeam().equals(piece.getTeam());
 	}
+	
+	public void play(Piece piece) {
+		try {
+			if (piece.getSquare() instanceof BottomStairway && this.isPiecesStairway(p)
+					|| piece.getSquare() instanceof StairwaySquare)
+				this.moveToStairway(piece, this.getDiceResult());
+			else {
+				this.moveForward(piece, this.getDiceResult());
+			}
+		} catch (PathBlockedException e) {
+			System.out.println("Mouvement impossible");
+		}
+		this.setDiceResult(0);
+		boardPanel.displayBoard();
+		this.nextTeam();
+	}
 
 	// TODO: Implement runGame()
 	@Override

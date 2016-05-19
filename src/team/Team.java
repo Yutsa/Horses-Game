@@ -2,6 +2,7 @@ package team;
 
 import java.util.ArrayList;
 
+import board.HorsePen;
 import game.Game;
 import game.HorsesGame;
 import piece.Horse;
@@ -128,6 +129,14 @@ public class Team {
 	 */
 	public boolean hasPiecesLeft() {
 		return getNbPieces() != 0;
+	}
+	
+	public boolean hasPieceOutsideHorsePen() {
+		for (Piece piece : pieces) {
+			if (!(piece.getSquare() instanceof HorsePen))
+				return true;
+		}
+		return false;
 	}
 	/*
 	 * (non-Javadoc)
