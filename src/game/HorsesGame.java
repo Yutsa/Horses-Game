@@ -20,7 +20,7 @@ public class HorsesGame extends Game {
 	private int diceResult;
 	
 	public HorsesGame(int nbTeam, int nbPiece) {
-		super(4, 4);
+		super(nbTeam, nbPiece);
 		setBoard(new BoardHorses(this));
 		addPiecesToTeams();
 	}

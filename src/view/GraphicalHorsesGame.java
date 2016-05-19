@@ -30,9 +30,9 @@ public class GraphicalHorsesGame extends JFrame{
 		this.add(menuPanel, BorderLayout.WEST);
 		
 		this.setTitle("Jeu des Petits Chevaux");
-		this.setVisible(true);
 		this.setSize(800, 400);
 		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

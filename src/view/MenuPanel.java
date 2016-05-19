@@ -7,13 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import board.BottomStairway;
-import board.StairwaySquare;
 import dice.Dice;
-import exceptions.PathBlockedException;
-import game.HorsesGame;
-import piece.Piece;
 import team.Team;
 
 public class MenuPanel extends JPanel {
@@ -22,6 +18,8 @@ public class MenuPanel extends JPanel {
 	Dice dice = new Dice(1, 6);
 	private JLabel diceResult;
 	private JLabel teamLabel;
+	private JTextField debugDice;
+	private JButton debugMove;
 	
 	public MenuPanel(GraphicalHorsesGame game) {
 		super();
@@ -31,9 +29,12 @@ public class MenuPanel extends JPanel {
 		
 		JLabel label = new JLabel("MENU");
 		JButton diceButton = new JButton("Lancer Dédé");
+		DiceListener diceListener = new DiceListener();
 		diceResult = new JLabel();
 		teamLabel = new JLabel("Au tour de l'équipe 0.");
-		DiceListener diceListener = new DiceListener();
+		debugDice = new JTextField();
+		debugMove = new JButton("Set diceNumber");
+		
 		
 		diceButton.addActionListener(diceListener);
 		this.setLayout(new GridLayout(4, 1));
@@ -42,7 +43,10 @@ public class MenuPanel extends JPanel {
 		this.add(teamLabel);
 		this.add(diceButton);
 		this.add(diceResult);
+		this.add(debugDice);
+		this.add(debugMove);
 		
+		debugMove.addActionListener(new DebugListener());
 		
 	}
 	
@@ -89,5 +93,18 @@ public class MenuPanel extends JPanel {
 		}
 	}
 
+	public class DebugListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			Team team = game.getGame().getCurrentTeam();
+			int curr = game.getGame().getCurrentTeamNb();
+			teamLabel.setText("Au tour de l'équipe " + (curr + 1));
+			int diceValue = Integer.parseInt(debugDice.getText());
+			game.getGame().setDiceResult(diceValue);
+			
+		}
+		
+	}
 	
 }
