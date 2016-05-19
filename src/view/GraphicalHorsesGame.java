@@ -68,9 +68,11 @@ public class GraphicalHorsesGame extends JFrame{
 		if (piece.getTeam().getNbPieces() == 0) {
 			System.out.println("GAGNÉ!");
 		}
+		if (game.getDiceResult() != 6) {
+			game.nextTeam();
+		}
 		game.setDiceResult(0);
 		boardPanel.displayBoard();
 		piece.getTeam().setCanPlay(false);
-		game.nextTeam();
 	}
 }
