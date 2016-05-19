@@ -73,14 +73,18 @@ public class MenuPanel extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			Team team = game.getGame().getCurrentTeam();
 			int curr = game.getGame().getCurrentTeamNb();
-			teamLabel.setText("Au tour de l'équipe " + curr);
-			game.getGame().setDiceResult(dice.roll());
-			diceResult.setText("Résultat du dé: " + game.getGame().getDiceResult());
+			teamLabel.setText("Au tour de l'équipe " + (curr + 1));
 			
-			
-			if (game.getGame().getDiceResult() != 6 && !team.hasPieceOutsideHorsePen()) {
-				game.getGame().setDiceResult(0);
-				game.getGame().nextTeam();
+			if (!team.canPlay()) {
+				game.getGame().setDiceResult(dice.roll());
+				diceResult.setText("Résultat du dé: " + game.getGame().getDiceResult());
+				
+				if (!team.canMove(game.getGame().getDiceResult())) {
+					game.getGame().setDiceResult(0);
+					game.getGame().nextTeam();
+				}
+				else
+					team.setCanPlay(true);
 			}
 		}
 	}

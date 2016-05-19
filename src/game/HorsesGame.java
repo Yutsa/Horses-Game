@@ -18,6 +18,7 @@ import view.GraphicalHorsesGame;
 public class HorsesGame extends Game {
 	private Dice dice = new Dice(1, 6);
 	private int diceResult;
+	
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
 		setBoard(new BoardHorses(this));

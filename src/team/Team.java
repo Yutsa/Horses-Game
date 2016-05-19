@@ -33,6 +33,7 @@ public class Team {
 	public Team(int color, Game game2) {
 		setGame(game2);
 		setColor(color);
+		setCanPlay(false);
 		pieces = new ArrayList<Piece>();
 	}
 
@@ -141,7 +142,11 @@ public class Team {
 	}
 	
 	// TODO: Check if a piece is playable bot blocked by another piece.
-	public boolean canPlay(int diceNumber) {
+	public boolean canPlay() {
+		return this.canPlay;
+	}
+	
+	public boolean canMove(int diceNumber) {
 		if (diceNumber == 6)
 			return true;
 		else 

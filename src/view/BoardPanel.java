@@ -22,9 +22,9 @@ public class BoardPanel extends JPanel {
 	public BoardPanel(GraphicalHorsesGame game) {
 		super();
 		squareButtons = new SquareButton[15][15];
+		setGame(game);
 		setUpBoard(game);
 		this.setLayout(new GridLayout(15, 15));
-		setGame(game);
 		displayBoard();
 	}
 
@@ -32,7 +32,7 @@ public class BoardPanel extends JPanel {
 		ImageIcon img = new ImageIcon();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				squareButtons[j][i] = new SquareButton(game.getGame().getBoard().getSquare(j, i), img, game);
+				squareButtons[j][i] = new SquareButton(game.getGame().getBoard().getSquare(j, i), img, game, this);
 				this.add(squareButtons[j][i]);
 			}
 		}

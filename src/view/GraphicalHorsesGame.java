@@ -65,8 +65,12 @@ public class GraphicalHorsesGame extends JFrame{
 		} catch (PathBlockedException e) {
 			System.out.println("Mouvement impossible");
 		}
+		if (piece.getTeam().getNbPieces() == 0) {
+			System.out.println("GAGNÉ!");
+		}
 		game.setDiceResult(0);
 		boardPanel.displayBoard();
+		piece.getTeam().setCanPlay(false);
 		game.nextTeam();
 	}
 }

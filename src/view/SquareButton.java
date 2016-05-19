@@ -19,9 +19,9 @@ public class SquareButton extends JButton {
 	private GraphicalHorsesGame graphicalHorsesGame;
 	private BoardPanel boardPanel;
 
-	public SquareButton(Square square, ImageIcon img, GraphicalHorsesGame game) {
+	public SquareButton(Square square, ImageIcon img, GraphicalHorsesGame game, BoardPanel boardPanel) {
 		super(img);
-		setBoardPanel(graphicalHorsesGame.getBoardPanel());
+		setBoardPanel(boardPanel);
 		setSquare(square);
 		setGraphicalHorsesGame(game);
 		this.setBorder(BorderFactory.createEmptyBorder());
