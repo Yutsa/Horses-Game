@@ -63,20 +63,7 @@ public class SquareButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (!square.isEmpty() && game.getDiceResult() != 0 && square.getPieceOnSquare().getTeam().equals(game.getCurrentTeam())) {
 			Piece p = square.getPieceOnSquare();
-
-			try {
-				if (p.getSquare() instanceof BottomStairway && game.isPiecesStairway(p)
-						|| p.getSquare() instanceof StairwaySquare)
-					game.moveToStairway(p, game.getDiceResult());
-				else {
-					game.moveForward(p, game.getDiceResult());
-				}
-			} catch (PathBlockedException e) {
-				System.out.println("Mouvement impossible");
-			}
-			game.setDiceResult(0);
-			boardPanel.displayBoard();
-			game.nextTeam();
+			game.play(p);
 		}
 	}
 }

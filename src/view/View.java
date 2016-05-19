@@ -41,4 +41,14 @@ public class View extends JFrame{
 			throw new IllegalArgumentException();
 		this.game = game;
 	}
+
+	public BoardPanel getBoardPanel() {
+		return boardPanel;
+	}
+
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+	
+	
 }

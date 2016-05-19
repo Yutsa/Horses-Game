@@ -12,11 +12,13 @@ import exceptions.PathBlockedException;
 import piece.Horse;
 import piece.Piece;
 import team.Team;
+import view.BoardPanel;
 import view.View;
 
 public class HorsesGame extends Game {
 	private Dice dice = new Dice(1, 6);
 	private int diceResult;
+	private View view;
 
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(4, 4);
@@ -383,7 +385,7 @@ public class HorsesGame extends Game {
 	
 	public void play(Piece piece) {
 		try {
-			if (piece.getSquare() instanceof BottomStairway && this.isPiecesStairway(p)
+			if (piece.getSquare() instanceof BottomStairway && this.isPiecesStairway(piece)
 					|| piece.getSquare() instanceof StairwaySquare)
 				this.moveToStairway(piece, this.getDiceResult());
 			else {
@@ -393,14 +395,25 @@ public class HorsesGame extends Game {
 			System.out.println("Mouvement impossible");
 		}
 		this.setDiceResult(0);
+		BoardPanel boardPanel = this.getView().getBoardPanel();
 		boardPanel.displayBoard();
 		this.nextTeam();
+	}
+
+	public View getView() {
+		return view;
+	}
+
+	public void setView(View view) {
+		if (view == null)
+			throw new IllegalArgumentException();
+		this.view = view;
 	}
 
 	// TODO: Implement runGame()
 	@Override
 	public void runGame() {
-		View view = new View(this);
+		view = new View(this);
 	}
 
 	@Override
