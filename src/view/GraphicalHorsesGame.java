@@ -26,7 +26,9 @@ public class GraphicalHorsesGame extends JFrame {
 	private MenuPanel menuPanel;
 
 	public GraphicalHorsesGame() {
+		// Place a Piece on the final step of the stairway to test the win condition.
 		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
+		
 		boardPanel = new BoardPanel(this);
 		menuPanel = new MenuPanel(this);
 
@@ -54,11 +56,22 @@ public class GraphicalHorsesGame extends JFrame {
 	public BoardPanel getBoardPanel() {
 		return boardPanel;
 	}
+	
+	public void setBoardPanel(BoardPanel b) {
+		if (b == null)
+			throw new IllegalArgumentException();
+		this.boardPanel = b;
+	}
 
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
 
+	public void setMenuPanel(MenuPanel m) {
+		if (m == null)
+			throw new IllegalArgumentException();
+		this.menuPanel = m;
+	}
 	public void play(Piece piece) {
 		try {
 			if (piece.getSquare() instanceof BottomStairway && game.isPiecesStairway(piece)
@@ -85,16 +98,26 @@ public class GraphicalHorsesGame extends JFrame {
 	}
 
 	public void displayWonDialog(Piece piece) {
-		JOptionPane wonDialog = new JOptionPane();
 		switch (JOptionPane.showConfirmDialog(this,
 				"L'équipe " + piece.getTeam().getColor() + " a gagné ! Rejouer ?", "GAGNÉ", JOptionPane.YES_NO_OPTION)) {
 		case JOptionPane.YES_OPTION:
-			this.dispose();
-			GraphicalHorsesGame game = new GraphicalHorsesGame();
+			replay();
 			break;
 		case JOptionPane.NO_OPTION:
 			this.dispose();
 			break;
 		}
+	}
+
+	public void replay() {
+		setGame(new HorsesGame(4, 1));
+		this.remove(boardPanel);
+		this.remove(menuPanel);
+		setBoardPanel(new BoardPanel(this));
+		setMenuPanel(new MenuPanel(this));
+		this.add(boardPanel, BorderLayout.EAST);
+		this.add(menuPanel, BorderLayout.WEST);
+		this.setVisible(true);
+		boardPanel.displayBoard();
 	}
 }
