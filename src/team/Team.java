@@ -135,29 +135,6 @@ public class Team {
 		return getNbPieces() != 0;
 	}
 	
-	public boolean hasPieceOutsideHorsePen() {
-		for (Piece piece : pieces) {
-			if (!(piece.getSquare() instanceof HorsePen))
-				return true;
-		}
-		return false;
-	}
-	
-	public boolean hasPieceInStairway() {
-		for (Piece piece : pieces) {
-			if (!(piece.getSquare() instanceof StairwaySquare))
-				return true;
-		}
-		return false;
-	}
-	
-	public boolean hasPieceOnBottomStairway() {
-		for (Piece piece : pieces) {
-			if (!(piece.getSquare() instanceof BottomStairway))
-				return true;
-		}
-		return false;
-	}
 	
 	// TODO: Check if a piece is playable bot blocked by another piece.
 	public boolean canPlay() {
@@ -165,10 +142,12 @@ public class Team {
 	}
 	
 	public boolean canMove(int diceNumber) {
-		if (diceNumber == 6)
-			return true;
-		else 
-			return hasPieceOutsideHorsePen();
+		for (Piece piece : pieces) {
+			Horse horse = (Horse) piece;
+			if (horse.canMove(diceNumber))
+				return true;
+		}
+		return false;
 	}
 	
 	public void setCanPlay(boolean b) {
