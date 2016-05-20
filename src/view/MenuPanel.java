@@ -31,9 +31,9 @@ public class MenuPanel extends JPanel {
 		JButton diceButton = new JButton("Lancer Dédé");
 		DiceListener diceListener = new DiceListener();
 		diceResult = new JLabel();
-		teamLabel = new JLabel("Au tour de l'équipe 0.");
+		teamLabel = new JLabel("Au tour de l'équipe 1.");
 		debugDice = new JTextField();
-		debugMove = new JButton("Set diceNumber");
+		debugMove = new JButton("DEBUG BUTTON");
 		
 		
 		diceButton.addActionListener(diceListener);
@@ -102,7 +102,7 @@ public class MenuPanel extends JPanel {
 			teamLabel.setText("Au tour de l'équipe " + (curr + 1));
 			int diceValue = Integer.parseInt(debugDice.getText());
 			game.getGame().setDiceResult(diceValue);
-			
+						
 		}
 		
 	}

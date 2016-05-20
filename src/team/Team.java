@@ -2,7 +2,9 @@ package team;
 
 import java.util.ArrayList;
 
+import board.BottomStairway;
 import board.HorsePen;
+import board.StairwaySquare;
 import game.Game;
 import game.HorsesGame;
 import piece.Horse;
@@ -136,6 +138,22 @@ public class Team {
 	public boolean hasPieceOutsideHorsePen() {
 		for (Piece piece : pieces) {
 			if (!(piece.getSquare() instanceof HorsePen))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean hasPieceInStairway() {
+		for (Piece piece : pieces) {
+			if (!(piece.getSquare() instanceof StairwaySquare))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean hasPieceOnBottomStairway() {
+		for (Piece piece : pieces) {
+			if (!(piece.getSquare() instanceof BottomStairway))
 				return true;
 		}
 		return false;
