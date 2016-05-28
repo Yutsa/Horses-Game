@@ -3,7 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -29,7 +30,6 @@ public class GraphicalHorsesGame extends JFrame {
 	private JButton diceButton;
 	private JDialog deciderFrame;
 
-	// TODO: Remove the bugs when resizing the window.
 	public GraphicalHorsesGame() {
 		// Place a Piece on the final step of the stairway to test the win condition.
 //		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
@@ -44,8 +44,9 @@ public class GraphicalHorsesGame extends JFrame {
 		this.add(menuPanel, BorderLayout.WEST);
 
 		this.setTitle("Jeu des Petits Chevaux");
-		this.setSize(800, 400);
+		this.setSize(600, 400);
 		this.setLocationRelativeTo(null);
+		createMenu();
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		decideStartingTeam();
@@ -129,7 +130,6 @@ public class GraphicalHorsesGame extends JFrame {
 		boardPanel.displayBoard();
 	}
 	
-	// TODO: Have a good interface and make it work.
 	public void decideStartingTeam() {
 		deciderFrame = new JDialog(this, "Quelle équipe va commencer ?", true);
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -203,6 +203,23 @@ public class GraphicalHorsesGame extends JFrame {
 				menuPanel.setTeamLabelText("Au tour de l'équipe " + (indexMax + 1));
 				deciderFrame.dispose();
 			}
+		}
+		
+	}
+	
+	public void createMenu() {
+		JMenuBar menuBar = new JMenuBar();
+		JMenuItem rules = new JMenuItem("Règles");
+		menuBar.add(rules);
+		rules.addActionListener(new RulesListener());
+		this.setJMenuBar(menuBar);
+	}
+	
+	public class RulesListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JDialog rules = new RulesDialog();
 		}
 		
 	}

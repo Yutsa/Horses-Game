@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,8 +27,7 @@ public class MenuPanel extends JPanel {
 		setGame(game);
 		setBoardPanel(game.getBoardPanel());
 		
-		
-		JLabel label = new JLabel("MENU");
+		this.setBorder(BorderFactory.createTitledBorder("MENU"));
 		JButton diceButton = new JButton("Lancer le dé");
 		DiceListener diceListener = new DiceListener();
 		diceResult = new JLabel();
@@ -39,9 +39,8 @@ public class MenuPanel extends JPanel {
 		
 		
 		diceButton.addActionListener(diceListener);
-		this.setLayout(new GridLayout(4, 1));
+		this.setLayout(new GridLayout(3, 1));
 		
-		this.add(label);
 		this.add(teamLabel);
 		this.add(diceButton);
 		this.add(diceResult);
