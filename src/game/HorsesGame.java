@@ -199,7 +199,6 @@ public class HorsesGame extends Game {
 		return getBoard().getSquare(posX, posY);
 	}
 
-	// TODO: Implement moveForward
 	/**
 	 * Move a {@link Piece}forward. If the piece is in a HorsePen move the Piece
 	 * using {@link moveFromHorsePen}.
@@ -287,8 +286,7 @@ public class HorsesGame extends Game {
 
 		}
 	}
-
-	// TODO: Implement moveBackward
+	
 	public void moveBackward(Piece piece, int nbDeplacement) throws PathBlockedException {
 		if (piece == null)
 			throw new IllegalArgumentException();

@@ -34,6 +34,14 @@ public abstract class Game {
 		return currentTeam;
 	}
 	
+	/**
+	 * Set the currentTeam number.
+	 * @param team The team you want to be the current one.
+	 */
+	public void setCurrentTeam(Team team) {
+		currentTeam = teams.indexOf(team);
+	}
+	
 	public void nextTeam() {
 		if (currentTeam == teams.size() - 1)
 			currentTeam = 0;
@@ -96,7 +104,7 @@ public abstract class Game {
 		teams.add(team);
 	}
 
-	public int getNbTeams() {
+	public int size() {
 		return teams.size();
 	}
 

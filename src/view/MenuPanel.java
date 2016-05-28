@@ -28,12 +28,14 @@ public class MenuPanel extends JPanel {
 		
 		
 		JLabel label = new JLabel("MENU");
-		JButton diceButton = new JButton("Lancer Dédé");
+		JButton diceButton = new JButton("Lancer le dé");
 		DiceListener diceListener = new DiceListener();
 		diceResult = new JLabel();
-		teamLabel = new JLabel("Au tour de l'équipe 1.");
-		debugDice = new JTextField();
-		debugMove = new JButton("DEBUG BUTTON");
+		teamLabel = new JLabel();
+		
+		// Debuging
+//		debugDice = new JTextField();
+//		debugMove = new JButton("DEBUG BUTTON");
 		
 		
 		diceButton.addActionListener(diceListener);
@@ -43,13 +45,17 @@ public class MenuPanel extends JPanel {
 		this.add(teamLabel);
 		this.add(diceButton);
 		this.add(diceResult);
-		this.add(debugDice);
-		this.add(debugMove);
 		
-		debugMove.addActionListener(new DebugListener());
+		// Debugging
+//		this.add(debugDice);
+//		this.add(debugMove);
+//		debugMove.addActionListener(new DebugListener());
 		
 	}
 	
+	public void setTeamLabelText(String txt) {
+		teamLabel.setText(txt);
+	}
 	
 	public BoardPanel getBoardPanel() {
 		return boardPanel;

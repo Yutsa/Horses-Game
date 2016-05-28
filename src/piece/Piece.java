@@ -12,7 +12,6 @@ import team.Team;
  * @author Édouard WILLISSECK
  */
 
-// TODO: Give a starting square to a Piece.
 public abstract class Piece {
 	private Square square;
 	private boolean alive;
@@ -20,7 +19,6 @@ public abstract class Piece {
 	private int startingSquareX;
 	private int startingSquareY;
 
-	// TODO: Solve issue: the square doesn't have the piece on it.
 	public Piece(int x, int y, boolean alive, Team team) {
 		setStartingSquareX(x);
 		setStartingSquareY(y);

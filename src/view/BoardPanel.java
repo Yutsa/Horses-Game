@@ -12,8 +12,6 @@ import board.BottomStairway;
 import board.HorsePen;
 import board.Square;
 import board.StairwaySquare;
-import game.Game;
-import game.HorsesGame;
 
 public class BoardPanel extends JPanel {
 	private GraphicalHorsesGame game;

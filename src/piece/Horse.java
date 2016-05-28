@@ -1,13 +1,9 @@
 package piece;
 
-import java.util.ArrayList;
-
 import board.BasicSquare;
 import board.BottomStairway;
 import board.HorsePen;
-import board.Square;
 import board.StairwaySquare;
-import exceptions.PathBlockedException;
 import team.Team;
 
 public class Horse extends Piece {

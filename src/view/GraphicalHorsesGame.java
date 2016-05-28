@@ -1,33 +1,40 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import board.BasicSquare;
 import board.BottomStairway;
-import board.Square;
 import board.StairwaySquare;
 import exceptions.PathBlockedException;
-import game.Game;
 import game.HorsesGame;
 import piece.Piece;
+import team.Team;
 
 public class GraphicalHorsesGame extends JFrame {
-	private HorsesGame game = new HorsesGame(4, 1);
+	private HorsesGame game = new HorsesGame(4, 4);
 	private BoardPanel boardPanel;
 	private MenuPanel menuPanel;
+	private JLabel[] diceResultLabels;
+	private JButton diceButton;
+	private JDialog deciderFrame;
 
+	// TODO: Remove the bugs when resizing the window.
 	public GraphicalHorsesGame() {
 		// Place a Piece on the final step of the stairway to test the win condition.
-		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
+//		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
+		
+		this.setResizable(false);
 		
 		boardPanel = new BoardPanel(this);
 		menuPanel = new MenuPanel(this);
@@ -41,6 +48,7 @@ public class GraphicalHorsesGame extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		decideStartingTeam();
 	}
 
 	public HorsesGame getGame() {
@@ -119,5 +127,83 @@ public class GraphicalHorsesGame extends JFrame {
 		this.add(menuPanel, BorderLayout.WEST);
 		this.setVisible(true);
 		boardPanel.displayBoard();
+	}
+	
+	// TODO: Have a good interface and make it work.
+	public void decideStartingTeam() {
+		deciderFrame = new JDialog(this, "Quelle équipe va commencer ?", true);
+		JPanel panel = new JPanel(new GridBagLayout());
+		JPanel diceResultPanel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 1;
+		c.weighty = 1;
+		panel.add(diceResultPanel, c);
+		
+		diceResultLabels = new JLabel[game.getNbTeam()];
+		for (int i = 0; i < game.getNbTeam(); i++) {
+			JLabel label = new JLabel("Équipe " + (i + 1) + ":");
+			c.gridx = i;
+			c.gridy = 0;
+			c.weightx = 1;
+			c.weighty = 1;
+			c.ipadx = 40;
+			c.ipady = 40;
+			diceResultPanel.add(label, c);
+			diceResultLabels[i] = new JLabel();
+			c.gridx = i;
+			c.gridy = 1;
+			c.weightx = 1;
+			c.weighty = 1;
+			diceResultPanel.add(diceResultLabels[i], c);
+		}
+		
+		diceButton = new JButton("Lancer le dé");
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 4;
+		panel.add(diceButton, c);
+		panel.setSize(400, 600);
+		panel.setVisible(true);
+		diceButton.addActionListener(new DiceHandler());
+		
+		deciderFrame.getContentPane().add(panel);
+		deciderFrame.pack();
+		deciderFrame.setVisible(true);
+		
+	}
+	
+	public class DiceHandler implements ActionListener {
+		private int counter = 0;
+		private int[] result = new int[game.getNbTeam()];
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if (counter < game.getNbTeam()) {
+				Team team = game.getCurrentTeam();
+				this.result[counter] = game.getDice().roll();
+				diceResultLabels[game.getCurrentTeamNb()].setText("" + result[counter]);
+				game.nextTeam();
+				counter++;
+				if (counter == 4)
+					diceButton.setText("Lancer la partie");
+			}
+			else {
+				int indexMax = 0;
+				int max = 0;
+				for (int i = 0; i < game.getNbTeam(); i++) {
+					if (result[i] > max) {
+						max = result[i];
+						indexMax = i;
+					}
+				}
+				game.setCurrentTeam(game.getTeam(indexMax));
+				menuPanel.setTeamLabelText("Au tour de l'équipe " + (indexMax + 1));
+				deciderFrame.dispose();
+			}
+		}
+		
 	}
 }
