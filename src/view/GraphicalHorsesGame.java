@@ -20,10 +20,13 @@ import board.StairwaySquare;
 import exceptions.PathBlockedException;
 import game.HorsesGame;
 import piece.Piece;
-import team.Team;
 
 public class GraphicalHorsesGame extends JFrame {
-	private HorsesGame game = new HorsesGame(4, 4);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 466892845740861801L;
+	private HorsesGame game = new HorsesGame(4, 1);
 	private BoardPanel boardPanel;
 	private MenuPanel menuPanel;
 	private JLabel[] diceResultLabels;
@@ -32,7 +35,7 @@ public class GraphicalHorsesGame extends JFrame {
 
 	public GraphicalHorsesGame() {
 		// Place a Piece on the final step of the stairway to test the win condition.
-//		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
+		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
 		
 		this.setResizable(false);
 		
@@ -128,6 +131,7 @@ public class GraphicalHorsesGame extends JFrame {
 		this.add(menuPanel, BorderLayout.WEST);
 		this.setVisible(true);
 		boardPanel.displayBoard();
+		decideStartingTeam();
 	}
 	
 	public void decideStartingTeam() {
@@ -182,7 +186,6 @@ public class GraphicalHorsesGame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if (counter < game.getNbTeam()) {
-				Team team = game.getCurrentTeam();
 				this.result[counter] = game.getDice().roll();
 				diceResultLabels[game.getCurrentTeamNb()].setText("" + result[counter]);
 				game.nextTeam();
@@ -219,7 +222,7 @@ public class GraphicalHorsesGame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JDialog rules = new RulesDialog();
+			new RulesDialog();
 		}
 		
 	}

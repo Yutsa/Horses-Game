@@ -7,14 +7,14 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import board.BottomStairway;
 import board.Square;
-import board.StairwaySquare;
-import exceptions.PathBlockedException;
-import game.HorsesGame;
 import piece.Piece;
 
 public class SquareButton extends JButton {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7337170632597842160L;
 	private Square square;
 	private GraphicalHorsesGame graphicalHorsesGame;
 	private BoardPanel boardPanel;

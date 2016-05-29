@@ -3,7 +3,6 @@ package piece;
 import board.HorsePen;
 import board.Square;
 import board.StairwaySquare;
-import exceptions.PathBlockedException;
 import team.Team;
 
 /**

@@ -14,6 +14,10 @@ import board.Square;
 import board.StairwaySquare;
 
 public class BoardPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5622654420900097400L;
 	private GraphicalHorsesGame game;
 	private SquareButton[][] squareButtons;
 

@@ -2,11 +2,7 @@ package team;
 
 import java.util.ArrayList;
 
-import board.BottomStairway;
-import board.HorsePen;
-import board.StairwaySquare;
 import game.Game;
-import game.HorsesGame;
 import piece.Horse;
 import piece.Piece;
 
@@ -154,14 +150,7 @@ public class Team {
 		this.canPlay = b;
 	}
 	
-	public boolean isPlayable() {
-		return this.canPlay;
-	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o == null)

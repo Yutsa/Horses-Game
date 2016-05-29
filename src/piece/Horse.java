@@ -40,6 +40,6 @@ public class Horse extends Piece {
 				return false;
 		}
 		
-		return false;
+		return true;
 	}
 }

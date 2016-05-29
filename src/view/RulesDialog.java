@@ -1,18 +1,20 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class RulesDialog extends JDialog implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5569287796933631677L;
+
 	public RulesDialog() {
 		super();
 		

@@ -1,13 +1,17 @@
 package application;
 
-import game.HorsesGame;
-import tests.Tester;
 import view.GraphicalHorsesGame;
 
+/**
+ * Application is the class that lauches the Game.
+ * 
+ * @author Édouard WILLISSECK and Rémy LADIESSE
+ *
+ */
 public class Application {
 
 	public static void main(String[] args) {
-		GraphicalHorsesGame game = new GraphicalHorsesGame();
+		new GraphicalHorsesGame();
 	}
 
 }

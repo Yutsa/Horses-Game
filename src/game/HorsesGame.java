@@ -12,8 +12,6 @@ import exceptions.PathBlockedException;
 import piece.Horse;
 import piece.Piece;
 import team.Team;
-import view.BoardPanel;
-import view.GraphicalHorsesGame;
 
 public class HorsesGame extends Game {
 	private Dice dice = new Dice(1, 6);
@@ -294,7 +292,6 @@ public class HorsesGame extends Game {
 			return;
 
 		Square pieceSquare = piece.getSquare();
-		Board board = piece.getSquare().getBoard();
 		Square previousSquare = getPreviousSquare(pieceSquare);
 
 		if (!previousSquare.isEmpty()) {
@@ -389,7 +386,6 @@ public class HorsesGame extends Game {
 		HorsesGame game = new HorsesGame(4, 4);
 		System.out.println(game.getBoard().toString());
 		Piece p = game.getTeam(0).getPiece(2);
-		Team team = game.getTeam(1);
 		Piece p2 = game.getTeam(1).getPiece(2);
 		p2.getSquare().setPieceOnSquare(null);
 		p2.setSquare(game.getBoard().getSquare(3, 6));

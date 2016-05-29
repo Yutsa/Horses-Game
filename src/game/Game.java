@@ -3,9 +3,6 @@ package game;
 import java.util.ArrayList;
 
 import board.Board;
-import dice.Dice;
-import piece.Horse;
-import piece.Piece;
 import team.Team;
 
 public abstract class Game {
@@ -15,7 +12,6 @@ public abstract class Game {
 	private Board board;
 	private ArrayList<Team> teams;
 	private int currentTeam = 0;
-	private Dice dice;
 
 	public Game(int nbTeam, int nbPiece) {
 		setNbTeam(nbTeam);
