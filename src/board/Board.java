@@ -1,6 +1,6 @@
 package board;
 
-import game.HorsesGame;
+import game.Game;
 
 /**
  * Board is the class representing a simple Board composed of {@link Square}s.
@@ -12,14 +12,17 @@ public abstract class Board {
 	private int width;
 	private int height;
 	private Square[][] squares;
-	private HorsesGame game;
+	private Game game;
 
 	/**
-	 * @param width The width of the board
-	 * @param height The height of the board
-	 * @param game The {@link HorsesGame}
+	 * @param width
+	 *            The width of this board
+	 * @param height
+	 *            The height of this board
+	 * @param game
+	 *            The {@link Game} of this board.
 	 */
-	public Board(int width, int height, HorsesGame game) {
+	public Board(int width, int height, Game game) {
 		setWidth(width);
 		setHeight(height);
 		setGame(game);
@@ -27,48 +30,52 @@ public abstract class Board {
 	}
 
 	/**
+	 * Sets the game for this board. It can be a HorsesGame a ChessGame for
+	 * instance.
+	 * 
 	 * @param game
+	 *            The game to be played on this board.
 	 */
-	public void setGame(HorsesGame game) {
+	public void setGame(Game game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;
 	}
 
 	/**
-	 * @return
+	 * Gets the {@link Game} played on this board.
+	 * 
+	 * @return The {@link Game} played on this board.
 	 */
-	public HorsesGame getGame() {
+	public Game getGame() {
 		return this.game;
 	}
 
 	/**
-	 * @return
+	 * Gets the two-dimensional array containing all the {@link Square}s
+	 * composing this Board.
+	 * 
+	 * @return The two-dimensional array reprensenting this board.
 	 */
 	public Square[][] getBoard() {
 		return this.squares;
 	}
 
 	/**
-	 * Get the width of the Board.
+	 * Gets the width of this Board.
 	 * 
-	 * @return The width of the Board.
-	 */
-	/**
-	 * @return
+	 * @return The width of this Board.
 	 */
 	public int getWidth() {
 		return width;
 	}
 
 	/**
-	 * Set the width of the Board.
+	 * Sets the width of this Board.
 	 * 
 	 * @param width
-	 *            The width of the Board.
-	 */
-	/**
-	 * @param width
+	 *            The width of this Board, it will be the number of
+	 *            {@link Square}s in a row.
 	 */
 	public void setWidth(int width) {
 		if (width <= 0)
@@ -77,25 +84,20 @@ public abstract class Board {
 	}
 
 	/**
-	 * Get the height of the Board.
+	 * Gets the height of this Board.
 	 * 
-	 * @return The height of the Board.
-	 */
-	/**
-	 * @return
+	 * @return The height of this Board.
 	 */
 	public int getHeight() {
 		return height;
 	}
 
 	/**
-	 * Set the height of the Board.
+	 * Sets the height of this Board.
 	 * 
 	 * @param height
-	 *            The height of the Board.
-	 */
-	/**
-	 * @param height
+	 *            The height of this Board. It will be the number of
+	 *            {@link Square}s in a column.
 	 */
 	public void setHeight(int height) {
 		if (height <= 0)
@@ -104,37 +106,27 @@ public abstract class Board {
 	}
 
 	/**
-	 * Get the Square of at the (x, y) position in the Board.
+	 * Gets the Square at the (x, y) position in this Board.
 	 * 
 	 * @param x
 	 *            The x-axis position of the Square.
 	 * @param y
 	 *            The y-axis position of the Square.
-	 * @return The Square at the (x, y) position in the Board.
-	 */
-	/**
-	 * @param x
-	 * @param y
-	 * @return
+	 * @return The Square at the (x, y) position in this Board.
 	 */
 	public Square getSquare(int x, int y) {
 		return squares[x][y];
 	}
 
 	/**
-	 * Get the Square of at the (x, y) position in the Board.
+	 * Sets the {@link Square} at the (x, y) position in this Board.
 	 * 
 	 * @param square
-	 *            The instance of a Square to put in the Board.
+	 *            The instance of a {@link Square} to put in this Board.
 	 * @param x
-	 *            The x-axis position of the Square.
+	 *            The x-axis position of the {@link Square}.
 	 * @param y
-	 *            The y-axis position of the Square.
-	 */
-	/**
-	 * @param square
-	 * @param x
-	 * @param y
+	 *            The y-axis position of the {@link Square}.
 	 */
 	public void setSquare(Square square, int x, int y) {
 		if (square == null)

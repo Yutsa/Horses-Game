@@ -18,15 +18,14 @@ public class Team {
 	private ArrayList<Piece> pieces;
 	private boolean canPlay;
 
-	
 	/**
 	 * Basic constructor.
 	 * 
 	 * @param color
-	 *            An integer representing the color of the team. It must be
+	 *            An integer representing the color of this team. It must be
 	 *            between 1 and the number of Teams for the game.
 	 * @param game2
-	 *            The Game being played by the Team.
+	 *            The Game being played by this Team.
 	 */
 	public Team(int color, Game game2) {
 		setGame(game2);
@@ -38,10 +37,11 @@ public class Team {
 	public Piece createPieces(int x, int y, boolean alive, Team team) {
 		return new Horse(x, y, alive, team);
 	}
+
 	/**
-	 * Gets the game being played by the team.
+	 * Gets the game being played by this team.
 	 * 
-	 * @return The game being played by the Team.
+	 * @return The game being played by this Team.
 	 */
 	public Game getGame() {
 		return game;
@@ -60,19 +60,19 @@ public class Team {
 	}
 
 	/**
-	 * Get the color of the team.
+	 * Gets the color of this team.
 	 * 
-	 * @return The color of the team.
+	 * @return The color of this team.
 	 */
 	public int getColor() {
 		return color;
 	}
 
 	/**
-	 * Set the color of the team.
+	 * Sets the color of this team.
 	 * 
 	 * @param color
-	 *            The color of the team.
+	 *            The color of this team.
 	 */
 	public void setColor(int color) {
 		if (color < 1 || color > game.getNbTeam()) {
@@ -80,10 +80,12 @@ public class Team {
 		}
 		this.color = color;
 	}
-	
+
 	/**
-	 * Get the Team's i piece.
-	 * @param i The index of the piece to get.
+	 * Gets the Team's i piece.
+	 * 
+	 * @param i
+	 *            The index of the piece to get.
 	 * @return The piece at index i
 	 */
 	public Piece getPiece(int i) {
@@ -91,20 +93,24 @@ public class Team {
 			throw new IllegalArgumentException();
 		return pieces.get(i);
 	}
-	
+
 	/**
-	 * Add a piece to the Team's pieces.
-	 * @param p The Piece to add.
+	 * Adds a piece to this Team's pieces.
+	 * 
+	 * @param p
+	 *            The Piece to add.
 	 */
 	public void addPiece(Piece p) {
 		if (p == null)
 			throw new IllegalArgumentException();
 		pieces.add(p);
 	}
-	
+
 	/**
-	 * Remove a Piece from the Team's pieces. 
-	 * @param p The Piece to remove.
+	 * Removes a Piece from this Team's pieces.
+	 * 
+	 * @param p
+	 *            The Piece to remove.
 	 */
 	public void removePiece(Piece p) {
 		if (p == null)
@@ -113,9 +119,10 @@ public class Team {
 			throw new IllegalArgumentException();
 		pieces.remove(p);
 	}
-	
+
 	/**
-	 * Get the number of pieces from this team.
+	 * Gets the number of pieces from this team.
+	 * 
 	 * @return The number of pieces from this team.
 	 */
 	public int getNbPieces() {
@@ -123,20 +130,32 @@ public class Team {
 	}
 
 	/**
-	 * Say if the Team still has pieces left or not.
+	 * Says if this Team still has pieces left or not.
 	 * 
-	 * @return A boolean, true if the Team still has pieces, false otherwise.
+	 * @return A boolean, true if this Team still has pieces, false otherwise.
 	 */
 	public boolean hasPiecesLeft() {
 		return getNbPieces() != 0;
 	}
-	
-	
+
 	// TODO: Check if a piece is playable bot blocked by another piece.
+	/**
+	 * Says if this team can play or not.
+	 * 
+	 * @return True is this team can play, false otherwise.
+	 */
 	public boolean canPlay() {
 		return this.canPlay;
 	}
-	
+
+	/**
+	 * Checks if one of this team's piece can move.
+	 * 
+	 * @param diceNumber
+	 *            The result of the dice roll
+	 * @return true if a piece can move, false otherwise
+	 * @see Dice
+	 */
 	public boolean canMove(int diceNumber) {
 		for (Piece piece : pieces) {
 			Horse horse = (Horse) piece;
@@ -145,12 +164,17 @@ public class Team {
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Sets the canPlay boolean
+	 * 
+	 * @param b
+	 *            A boolean to say if this team can play or not.
+	 */
 	public void setCanPlay(boolean b) {
 		this.canPlay = b;
 	}
-	
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o == null)

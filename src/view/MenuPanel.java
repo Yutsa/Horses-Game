@@ -13,10 +13,12 @@ import javax.swing.JTextField;
 import dice.Dice;
 import team.Team;
 
+/**
+ * The MenuPanel class is the one displaying the menu of the GraphicalHorsesGame.
+ * @author edouard
+ *
+ */
 public class MenuPanel extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8402937111338612971L;
 	private GraphicalHorsesGame game;
 	private BoardPanel boardPanel;
@@ -26,6 +28,9 @@ public class MenuPanel extends JPanel {
 	private JTextField debugDice;
 	//private JButton debugMove;
 	
+	/**
+	 * @param game The instance of GraphicalHorsesGame this menu is for.
+	 */
 	public MenuPanel(GraphicalHorsesGame game) {
 		super();
 		setGame(game);
@@ -56,15 +61,29 @@ public class MenuPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Sets the text for the label indication the team currently playing.
+	 * @param txt The text you want to put in the label. 
+	 */
 	public void setTeamLabelText(String txt) {
 		teamLabel.setText(txt);
 	}
 	
+	/**
+	 * Gets the BoardPanel of the game's main window.
+	 * @return The Boardpanel of the game's main window.
+	 * @see GraphicalHorsesGame
+	 * @see BoardPanel
+	 */
 	public BoardPanel getBoardPanel() {
 		return boardPanel;
 	}
 
 
+	/**
+	 * Sets the BoardPanel of the game's main window.
+	 * @param boardPanel The BoardPanel of the game's main window.
+	 */
 	public void setBoardPanel(BoardPanel boardPanel) {
 		if (boardPanel == null)
 			throw new IllegalArgumentException();
@@ -72,9 +91,18 @@ public class MenuPanel extends JPanel {
 	}
 
 
+	/**
+	 * Gets the instance of the graphical version of horses game being played.
+	 * @return The instance of the graphical version of horses game being played.
+	 */
 	public GraphicalHorsesGame getGame() {
 		return game;
 	}
+	
+	/**
+	 * Sets the instance of the graphical version of horses game being played.
+	 * @param game The instance of the graphical version of horses game being played.
+	 */
 	public void setGame(GraphicalHorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();

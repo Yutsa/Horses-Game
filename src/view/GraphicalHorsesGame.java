@@ -21,10 +21,14 @@ import exceptions.PathBlockedException;
 import game.HorsesGame;
 import piece.Piece;
 
+/**
+ * The GraphicalHorsesGame represents an instance of a Horses game being played
+ * with a graphical interface.
+ * 
+ * @author edouard
+ *
+ */
 public class GraphicalHorsesGame extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 466892845740861801L;
 	private HorsesGame game = new HorsesGame(4, 1);
 	private BoardPanel boardPanel;
@@ -34,11 +38,12 @@ public class GraphicalHorsesGame extends JFrame {
 	private JDialog deciderFrame;
 
 	public GraphicalHorsesGame() {
-		// Place a Piece on the final step of the stairway to test the win condition.
+		// Place a Piece on the final step of the stairway to test the win
+		// condition.
 		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
-		
+
 		this.setResizable(false);
-		
+
 		boardPanel = new BoardPanel(this);
 		menuPanel = new MenuPanel(this);
 
@@ -55,35 +60,70 @@ public class GraphicalHorsesGame extends JFrame {
 		decideStartingTeam();
 	}
 
+	/**
+	 * Gets the instance of HorsesGame being played
+	 * @return The instance of HorsesGame being played
+	 * @see HorsesGame
+	 */
 	public HorsesGame getGame() {
 		return game;
 	}
 
+	/**
+	 * Sets the instance of HorsesGame being played.
+	 * @param game The instance of HorsesGame being played.
+	 * @see HorsesGame
+	 */
 	public void setGame(HorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;
 	}
 
+	/**
+	 * Gets the instance of the panel displaying the board.
+	 * @return The instance of BoardPanel.
+	 * @see BoardPanel
+	 */
 	public BoardPanel getBoardPanel() {
 		return boardPanel;
 	}
-	
+
+	/**
+	 * Sets the instance of the panel containing the board.
+	 * @param b The BoardPanel instance for this GraphicalHorsesGame.
+	 * @see BoardPanel
+	 */
 	public void setBoardPanel(BoardPanel b) {
 		if (b == null)
 			throw new IllegalArgumentException();
 		this.boardPanel = b;
 	}
 
+	/** 
+	 * Gets the instance of the panel containing the menu.
+	 * @return The MenuPanel instance for this GraphicalHorsesGame.
+	 * @see MenuPanel
+	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
 
+	/**
+	 * Sets the instance of the panel containing the menu.
+	 * @param The MenuPanel instance for this GraphicalHorsesGame.
+	 * @see MenuPanel
+	 */
 	public void setMenuPanel(MenuPanel m) {
 		if (m == null)
 			throw new IllegalArgumentException();
 		this.menuPanel = m;
 	}
+
+	/**
+	 * Plays a turn of the Game after having rolled the dice and selected the piece to move.
+	 * @param piece The piece to play.
+	 */
 	public void play(Piece piece) {
 		try {
 			if (piece.getSquare() instanceof BottomStairway && game.isPiecesStairway(piece)
@@ -95,12 +135,12 @@ public class GraphicalHorsesGame extends JFrame {
 		} catch (PathBlockedException e) {
 			System.out.println("Mouvement impossible");
 		}
-		
+
 		if (piece.getTeam().getNbPieces() == 0) {
 			boardPanel.displayBoard();
 			displayWonDialog(piece);
 		}
-		
+
 		if (game.getDiceResult() != 6) {
 			game.nextTeam();
 		}
@@ -109,9 +149,13 @@ public class GraphicalHorsesGame extends JFrame {
 		piece.getTeam().setCanPlay(false);
 	}
 
+	/**
+	 * Displays the dialog to say a team has won and to ask if the player wants to play again.
+	 * @param piece The piece that won the game.
+	 */
 	public void displayWonDialog(Piece piece) {
-		switch (JOptionPane.showConfirmDialog(this,
-				"L'équipe " + piece.getTeam().getColor() + " a gagné ! Rejouer ?", "GAGNÉ", JOptionPane.YES_NO_OPTION)) {
+		switch (JOptionPane.showConfirmDialog(this, "L'équipe " + piece.getTeam().getColor() + " a gagné ! Rejouer ?",
+				"GAGNÉ", JOptionPane.YES_NO_OPTION)) {
 		case JOptionPane.YES_OPTION:
 			replay();
 			break;
@@ -121,6 +165,9 @@ public class GraphicalHorsesGame extends JFrame {
 		}
 	}
 
+	/**
+	 * Resets this game by creating a new instance of HorsesGame and a new display.
+	 */
 	public void replay() {
 		setGame(new HorsesGame(4, 1));
 		this.remove(boardPanel);
@@ -133,19 +180,22 @@ public class GraphicalHorsesGame extends JFrame {
 		boardPanel.displayBoard();
 		decideStartingTeam();
 	}
-	
+
+	/**
+	 * Shows a dialog to decide which team will be starting. It's chosen on a dice roll.
+	 */
 	public void decideStartingTeam() {
 		deciderFrame = new JDialog(this, "Quelle équipe va commencer ?", true);
 		JPanel panel = new JPanel(new GridBagLayout());
 		JPanel diceResultPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		
+
 		c.gridx = 0;
 		c.gridy = 0;
 		c.weightx = 1;
 		c.weighty = 1;
 		panel.add(diceResultPanel, c);
-		
+
 		diceResultLabels = new JLabel[game.getNbTeam()];
 		for (int i = 0; i < game.getNbTeam(); i++) {
 			JLabel label = new JLabel("Équipe " + (i + 1) + ":");
@@ -163,7 +213,7 @@ public class GraphicalHorsesGame extends JFrame {
 			c.weighty = 1;
 			diceResultPanel.add(diceResultLabels[i], c);
 		}
-		
+
 		diceButton = new JButton("Lancer le dé");
 		c.gridx = 0;
 		c.gridy = 1;
@@ -172,17 +222,22 @@ public class GraphicalHorsesGame extends JFrame {
 		panel.setSize(400, 600);
 		panel.setVisible(true);
 		diceButton.addActionListener(new DiceHandler());
-		
+
 		deciderFrame.getContentPane().add(panel);
 		deciderFrame.pack();
 		deciderFrame.setVisible(true);
-		
+
 	}
-	
+
+	/**
+	 * The DiceHandler handles the action of rolling the dice in the Team Decider dialog.
+	 * @author edouard
+	 *
+	 */
 	public class DiceHandler implements ActionListener {
 		private int counter = 0;
 		private int[] result = new int[game.getNbTeam()];
-		
+
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if (counter < game.getNbTeam()) {
@@ -192,8 +247,7 @@ public class GraphicalHorsesGame extends JFrame {
 				counter++;
 				if (counter == 4)
 					diceButton.setText("Lancer la partie");
-			}
-			else {
+			} else {
 				int indexMax = 0;
 				int max = 0;
 				for (int i = 0; i < game.getNbTeam(); i++) {
@@ -207,9 +261,12 @@ public class GraphicalHorsesGame extends JFrame {
 				deciderFrame.dispose();
 			}
 		}
-		
+
 	}
-	
+
+	/**
+	 * Creates the menu for this game, it is used to display the rules of this game.
+	 */
 	public void createMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		JMenuItem rules = new JMenuItem("Règles");
@@ -217,13 +274,13 @@ public class GraphicalHorsesGame extends JFrame {
 		rules.addActionListener(new RulesListener());
 		this.setJMenuBar(menuBar);
 	}
-	
-	public class RulesListener implements ActionListener{
+
+	public class RulesListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			new RulesDialog();
 		}
-		
+
 	}
 }

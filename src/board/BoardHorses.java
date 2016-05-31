@@ -2,8 +2,17 @@ package board;
 
 import game.HorsesGame;
 
-//Implement HorsesGame.
+
+/**
+ * BoardHorses is the class representing the {@link Board} of a Horses game.
+ *  
+ * @author edouard
+ *
+ */
 public class BoardHorses extends Board {
+	/**
+	 * @param game The {@link HorsesGame} played on this board.
+	 */
 	public BoardHorses(HorsesGame game) {
 		super(15, 15, game);
 		createBasicSquares();
@@ -12,6 +21,9 @@ public class BoardHorses extends Board {
 		createStairwaySquare();
 	}
 
+	/**
+	 * Creates the {@link BasicSquare} in their right position inside this Board.
+	 */
 	public void createBasicSquares() {
 		Square[][] squares = this.getBoard();
 		for (int i = 0; i < 7; i++) {
@@ -40,6 +52,9 @@ public class BoardHorses extends Board {
 		}
 	}
 
+	/**
+	 * Creates the {@link HorsePen} in their right position inside this Board.
+	 */
 	public void createHorsePen() {
 		Square[][] squares = this.getBoard();
 		for (int i = 0; i < 6; i++) {
@@ -64,6 +79,9 @@ public class BoardHorses extends Board {
 		}
 	}
 
+	/**
+	 * Creates the {@link BottomStairway} in their right position inside this Board.
+	 */
 	public void createBottomStairway() {
 		Square[][] squares = this.getBoard();
 		squares[0][7] = new BottomStairway(0, 7, this.getGame().getTeam(0), this);
@@ -76,6 +94,9 @@ public class BoardHorses extends Board {
 
 	}
 	
+	/**
+	 * Creates the {@link StairwaySquare} in their right position inside this Board.
+	 */
 	public void createStairwaySquare() {
 		Square[][] squares = this.getBoard();
 		int j = 1;

@@ -1,5 +1,6 @@
 package piece;
 
+import board.Board;
 import board.HorsePen;
 import board.Square;
 import board.StairwaySquare;
@@ -18,6 +19,12 @@ public abstract class Piece {
 	private int startingSquareX;
 	private int startingSquareY;
 
+	/**
+	 * @param x The x-axis position of the Horse.
+	 * @param y The y-axis position of the Horse.
+	 * @param alive A boolean to check if the Horse is alive or not.
+	 * @param team The team of this Horse.
+	 */
 	public Piece(int x, int y, boolean alive, Team team) {
 		setStartingSquareX(x);
 		setStartingSquareY(y);
@@ -27,19 +34,19 @@ public abstract class Piece {
 	}
 
 	/**
-	 * Get the square the piece is on.
+	 * Gets the square this piece is on.
 	 * 
-	 * @return The Square the piece is on.
+	 * @return The Square this piece is on.
 	 */
 	public Square getSquare() {
 		return square;
 	}
 
 	/**
-	 * Set the square the piece is on.
+	 * Sets the square this piece is on.
 	 * 
 	 * @param square
-	 *            The Square the piece is on.
+	 *            The Square this piece is on.
 	 */
 	public void setSquare(Square square) {
 		if (square == null) {
@@ -53,38 +60,38 @@ public abstract class Piece {
 	}
 
 	/**
-	 * Get the living status of the piece.
+	 * Gets the living status of this piece.
 	 * 
-	 * @return A boolean showing whether the piece is alive or not.
+	 * @return A boolean showing whether this piece is alive or not.
 	 */
 	public boolean isAlive() {
 		return alive;
 	}
 
 	/**
-	 * Set the living status of the Piece.
+	 * Sets the living status of this Piece.
 	 * 
 	 * @param alive
-	 *            A boolean representing whether or not the cell is alive.
+	 *            A boolean representing whether or not this piece is alive.
 	 */
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
 
 	/**
-	 * Get the team of the Piece.
+	 * Gets the team of this Piece.
 	 * 
-	 * @return The Team of the Piece.
+	 * @return The Team of this Piece.
 	 */
 	public Team getTeam() {
 		return team;
 	}
 
 	/**
-	 * Set the team of the Piece
+	 * Sets the team of this Piece
 	 * 
 	 * @param team
-	 *            the Team of the Piece.
+	 *            the Team of this Piece.
 	 */
 	public void setTeam(Team team) {
 		if (team == null)
@@ -105,28 +112,45 @@ public abstract class Piece {
 		return p.getSquare().equals(this.square) && p.getTeam().equals(this.team) && p.isAlive() == this.alive;
 	}
 
-	// WARNING: Careful when implementing Square's toString method to avoid a
-	// infinte
-	// recursive call to each toString method.
 	@Override
 	public String toString() {
 		return "Piece [square=" + square + ", alive=" + alive + ", team=" + team + "]";
 	}
 
+	/**
+	 * Gets the x-axis position of this piece's starting square on the board.
+	 * @return The x-axis position of this piece's starting square.
+	 * @see Board
+	 */
 	public int getStartingSquareX() {
 		return startingSquareX;
 	}
 
+	/**
+	 * Sets the x-axis position of this piece's starting square on the board.
+	 * @return The x-axis position of this piece's starting square.
+	 * @see Board
+	 */
 	public void setStartingSquareX(int startingSquareX) {
 		if (startingSquareX < 0 || startingSquareX > 14)
 			throw new IllegalArgumentException();
 		this.startingSquareX = startingSquareX;
 	}
 
+	/**
+	 * Gets the y-axis position of this piece's starting square on the board.
+	 * @return The y-axis position of this piece's starting square.
+	 * @see Board
+	 */
 	public int getStartingSquareY() {
 		return startingSquareY;
 	}
 
+	/**
+	 * Sets the y-axis position of this piece's starting square on the board.
+	 * @return The y-axis position of this piece's starting square.
+	 * @see Board
+	 */
 	public void setStartingSquareY(int startingSquareY) {
 		if (startingSquareY < 0 || startingSquareY > 14)
 			throw new IllegalArgumentException();

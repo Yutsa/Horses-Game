@@ -3,6 +3,12 @@ package board;
 import piece.Piece;
 import team.Team;
 
+/**
+ * Square is the class representing a Square in a board game.
+ * 
+ * @author edouard
+ *
+ */
 public abstract class Square {
 	private int posX;
 	private int posY;
@@ -10,27 +16,39 @@ public abstract class Square {
 	private Piece pieceOnSquare;
 	private Board board;
 
-	
+	/**
+	 * @param posX
+	 *            The x-axis position of the square.
+	 * @param posY
+	 *            The y-axis position of the square.
+	 * @param team
+	 *            The {@link Team} of the square
+	 * @param board
+	 *            The {@link Board} the square is on.
+	 */
 	public Square(int posX, int posY, Team team, Board board) {
 		setBoard(board);
 		setPosX(posX);
 		setPosY(posY);
 		setTeam(team);
 	}
+
 	/**
-	 * Get the board the Square is linked to.
+	 * Gets the board this Square is linked to.
 	 * 
-	 * @return The Board the Square is linked to.
+	 * @return The Board this Square is linked to.
 	 */
 	public Board getBoard() {
 		return board;
 	}
 
 	/**
-	 * Set the board the Square is linked to.
+	 * Sets the board this Square is linked to.
 	 * 
 	 * @param board
-	 *            The Board the Square is linked to.
+	 *            The {@link Board} this Square is linked to.
+	 * 
+	 * @see Board
 	 */
 	public void setBoard(Board board) {
 		if (board == null)
@@ -39,28 +57,29 @@ public abstract class Square {
 	}
 
 	/**
-	 * Set a Piece on the Square.
+	 * Puts a Piece on this Square.
 	 * 
 	 * @param piece
-	 *            The Piece to put on the Square.
+	 *            The Piece to put on this Square.
+	 * @see Piece
 	 */
 	public void setPieceOnSquare(Piece piece) {
 		pieceOnSquare = piece;
 	}
 
 	/**
-	 * Get the Piece that is on the Square.
+	 * Gets the Piece that is on this Square.
 	 * 
-	 * @return The Piece that is on the Square.
+	 * @return The Piece that is on this Square or null if there aren't any.
 	 */
 	public Piece getPieceOnSquare() {
 		return pieceOnSquare;
 	}
 
 	/**
-	 * Get the x-axis position of the Square on the Board.
+	 * Gets the x-axis position of this Square on the Board.
 	 * 
-	 * @return An integer representing the x-axis position of the Square on the
+	 * @return An integer representing the x-axis position of this Square on the
 	 *         Board.
 	 */
 	public int getPosX() {
@@ -68,10 +87,10 @@ public abstract class Square {
 	}
 
 	/**
-	 * Set the x-axis position of the Square on the Board.
+	 * Sets the x-axis position of this Square on the Board.
 	 * 
 	 * @param posX
-	 *            An integer representing the x-axis position of the Square on
+	 *            An integer representing the x-axis position of this Square on
 	 *            the Board.
 	 */
 	public void setPosX(int posX) {
@@ -81,18 +100,18 @@ public abstract class Square {
 	}
 
 	/**
-	 * Get the y-axis position of the Square.
+	 * Gets the y-axis position of this Square.
 	 * 
-	 * @return An integer representing the y-axis position of the Square.
+	 * @return An integer representing the y-axis position of this Square.
 	 */
 	public int getPosY() {
 		return posY;
 	}
 
 	/**
-	 * Set the y-axis position of the Square.
+	 * Sets the y-axis position of this Square.
 	 * 
-	 * @return An integer representing the y-axis position of the Square.
+	 * @return An integer representing the y-axis position of this Square.
 	 */
 	public void setPosY(int posY) {
 		if (posY < 0 || posY > board.getHeight())
@@ -101,9 +120,9 @@ public abstract class Square {
 	}
 
 	/**
-	 * Get the Square's Team.
+	 * Gets the Square's {@link Team}.
 	 * 
-	 * @return The Square's Team.
+	 * @return The Square's {@link Team}.
 	 */
 	public Team getTeam() {
 		return team;
@@ -114,6 +133,7 @@ public abstract class Square {
 	 * 
 	 * @param team
 	 *            The Square's Team.
+	 * @see Team
 	 */
 	public void setTeam(Team team) {
 		if (team == null)
@@ -148,7 +168,7 @@ public abstract class Square {
 	}
 
 	/**
-	 * Check if the Square is empty.
+	 * Check if this Square is empty. That is if he doesn't have a piece on it.
 	 * 
 	 * @return True if the Square is empty, False otherwise.
 	 */

@@ -13,14 +13,20 @@ import board.HorsePen;
 import board.Square;
 import board.StairwaySquare;
 
+/**
+ * The BoardPanel class is to display the board on the window.
+ * 
+ * @author edouard
+ *
+ */
 public class BoardPanel extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5622654420900097400L;
 	private GraphicalHorsesGame game;
 	private SquareButton[][] squareButtons;
 
+	/**
+	 * @param game The instance of graphical game being played in the window.
+	 */
 	public BoardPanel(GraphicalHorsesGame game) {
 		super();
 		squareButtons = new SquareButton[15][15];
@@ -30,6 +36,10 @@ public class BoardPanel extends JPanel {
 		displayBoard();
 	}
 
+	/**
+	 * Creates the graphical board for the game.
+	 * @param game The instance of graphical game being played in the window.
+	 */
 	public void setUpBoard(GraphicalHorsesGame game) {
 		ImageIcon img = new ImageIcon();
 		for (int i = 0; i < 15; i++) {
@@ -40,20 +50,38 @@ public class BoardPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Gets the SquareButton at the (x, y) position.
+	 * @param x The x-axis position of the button
+	 * @param y The y-axis position of the button
+	 * @return The SquareButton at the (x, y) position
+	 * @see SquareButton
+	 */
 	public SquareButton getSquareButton(int x, int y) {
 		return squareButtons[x][y];
 	}
 
+	/**
+	 * Returns the instance of graphical game being played in the window.
+	 * @return The instance of graphical game being played in the window.
+	 */
 	public GraphicalHorsesGame getGame() {
 		return game;
 	}
 
+	/**
+	 * Sets the instance of graphical game being played in the window.
+	 * @param game The instance of graphical game being played in the window.
+	 */
 	public void setGame(GraphicalHorsesGame game) {
 		if (game == null)
 			throw new IllegalArgumentException();
 		this.game = game;
 	}
 
+	/**
+	 * Displays the board in this panel.
+	 */
 	public void displayBoard() {
 		int i, j;
 		ImageIcon pion = new ImageIcon();

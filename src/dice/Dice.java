@@ -10,14 +10,14 @@ import java.util.Random;
  */
 public class Dice {
 	/**
-	 * The minimum number the dice can roll.
+	 * The minimum number this dice can roll.
 	 * 
 	 * @see Dice#setMinimum(int)
 	 * @see Dice#roll()
 	 */
 	private int minimum;
 	/**
-	 * The maximum number the dice can roll.
+	 * The maximum number this dice can roll.
 	 * 
 	 * @see Dice#setMaximum(int)
 	 * @see Dice#roll()
@@ -25,7 +25,7 @@ public class Dice {
 	private int maximum;
 
 	/**
-	 * The main constructor for the dice.
+	 * The main constructor for this dice.
 	 * 
 	 * @param mini
 	 *            The minimum number you can roll.

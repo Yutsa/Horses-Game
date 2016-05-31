@@ -13,28 +13,63 @@ import piece.Horse;
 import piece.Piece;
 import team.Team;
 
+/**
+ * The HorsesGame class represents the implementation of the Horses game.
+ * 
+ * @author edouard
+ *
+ */
 public class HorsesGame extends Game {
 	private Dice dice = new Dice(1, 6);
 	private int diceResult;
-	
+
+	/**
+	 * @param nbTeam
+	 *            The number of teams to play this game.
+	 * @param nbPiece
+	 *            The number of pieces by team for this game.
+	 */
 	public HorsesGame(int nbTeam, int nbPiece) {
 		super(nbTeam, nbPiece);
 		setBoard(new BoardHorses(this));
 		addPiecesToTeams();
 	}
 
+	/**
+	 * Gets the result of the dice.
+	 * 
+	 * @return The result of the dice.
+	 * @see Dice
+	 */
 	public int getDiceResult() {
 		return diceResult;
 	}
 
+	/**
+	 * Sets the result of the dice.
+	 * 
+	 * @param diceResult
+	 *            The result of the dice.
+	 * @see Dice
+	 */
 	public void setDiceResult(int diceResult) {
 		this.diceResult = diceResult;
 	}
 
+	/**
+	 * Gets the dice used in this game.
+	 * 
+	 * @return The dice used in this game.
+	 * @see Dice
+	 */
 	public Dice getDice() {
 		return dice;
 	}
 
+	/**
+	 * Adds the pieces to each teams and places them at their correct starting
+	 * position.
+	 */
 	public void addPiecesToTeams() {
 		for (Team t : getTeams()) {
 			if (t.getColor() == 1) {
@@ -58,10 +93,12 @@ public class HorsesGame extends Game {
 	}
 
 	/**
-	 * Return the next Square, excluding the horsepen.
+	 * Returns the next Square, excluding the horsepen.
 	 * 
 	 * @param A
-	 * @return
+	 *            The square for which you want to know the next square
+	 * @return The next square.
+	 * @see Square
 	 */
 	public Square getNextSquare(Square A) {
 		if (A == null)
@@ -116,7 +153,10 @@ public class HorsesGame extends Game {
 	 * Returns the previous Square not including the horspen.
 	 * 
 	 * @param A
-	 * @return
+	 *            The current square for which you want to know the previous
+	 *            square.
+	 * @return The previous square.
+	 * @see Square
 	 */
 	public Square getPreviousSquare(Square A) {
 		if (A == null)
@@ -198,13 +238,14 @@ public class HorsesGame extends Game {
 	}
 
 	/**
-	 * Move a {@link Piece}forward. If the piece is in a HorsePen move the Piece
-	 * using {@link moveFromHorsePen}.
+	 * Moves a {@link Piece}forward. If the piece is in a HorsePen move the
+	 * Piece using {@link moveFromHorsePen}.
 	 * 
-	 * @param piece
-	 * @param nbDeplacement
-	 * @param moveStairway
-	 * @throws PathBlockedException
+	 * @param piece The piece that is to be moved.
+	 * @param nbDeplacement The number of squares left to go.
+	 * @throws PathBlockedException If the piece is blocked by another piece.
+	 * @see Piece
+	 * @see Square
 	 */
 	public void moveForward(Piece piece, int nbDeplacement) throws PathBlockedException {
 		if (piece == null)
@@ -257,14 +298,16 @@ public class HorsesGame extends Game {
 	}
 
 	/**
-	 * Move a {@link Piece} from its {@link HorsePen}. If a enemy {@link Piece}
+	 * Moves a {@link Piece} from its {@link HorsePen}. If a enemy {@link Piece}
 	 * is on the startSquare it kills it. If one of your Team's Piece is on the
 	 * startSquare it throws a {@link PathBlockedException}.
 	 *
-	 * @param piece
-	 * @param pieceSquare
-	 * @param startSquare
-	 * @throws PathBlockedException
+	 * @param piece The piece to move.
+	 * @param pieceSquare The square the piece to be moved is in.
+	 * @param startSquare The square after the horse pen.
+	 * @throws PathBlockedException If there is already a piece on the next square.
+	 * @see Square
+	 * @see Piece
 	 */
 	public void moveFromHorsePen(Piece piece, Square pieceSquare, Square startSquare) throws PathBlockedException {
 		if (piece == null || pieceSquare == null || startSquare == null)
@@ -284,7 +327,15 @@ public class HorsesGame extends Game {
 
 		}
 	}
-	
+
+	/**
+	 * Moves a piece backwards. Throws a {@link PathBlockedException} if a square is blocked by another piece.
+	 * @param piece The piece to move.
+	 * @param nbDeplacement The number of squares left.
+	 * @throws PathBlockedException If a square is occupied by another piece
+	 * @see Square
+	 * @see Piece
+	 */
 	public void moveBackward(Piece piece, int nbDeplacement) throws PathBlockedException {
 		if (piece == null)
 			throw new IllegalArgumentException();
@@ -309,11 +360,12 @@ public class HorsesGame extends Game {
 	}
 
 	/**
-	 * Move the {@link Piece} to the {@link StairwaySquare}. Checks if the
+	 * Moves the {@link Piece} to the {@link StairwaySquare}. Checks if the
 	 * movement is authorized.
 	 * 
-	 * @param piece
-	 * @param nbDeplacement
+	 * @param piece The piece to move.
+	 * @param nbDeplacement The result of movement.
+	 * @see Piece
 	 */
 	public void moveToStairway(Piece piece, int nbDeplacement) throws PathBlockedException {
 		if (piece == null)
@@ -351,8 +403,9 @@ public class HorsesGame extends Game {
 	 * Kills a {@link Piece}. The killer Piece takes it place and the killed
 	 * Piece goes back to its startingSquare.
 	 * 
-	 * @param killer
-	 * @param killed
+	 * @param killer The piece that kills the other.
+	 * @param killed The piece that is killed.
+	 * @see Piece
 	 */
 	public void killPiece(Piece killer, Piece killed) {
 		if (killer == null || killed == null || (killer == killed))
@@ -365,12 +418,25 @@ public class HorsesGame extends Game {
 
 	}
 
+	/**
+	 * Creates the pieces.
+	 * @param x The x-axis position of the piece.
+	 * @param y The y-axis position of the piece.
+	 * @param alive A boolean to say if the piece is alive or not
+	 * @param team The team of the piece created
+	 * @return The newly created piece
+	 */
 	public Horse createPieces(int x, int y, boolean alive, Team team) {
 		if (team == null)
 			throw new IllegalArgumentException();
 		return new Horse(x, y, alive, team);
 	}
 
+	/**
+	 * Checks if a piece is on a square of its team.
+	 * @param piece The piece for which you want to know if it's on a square of its team
+	 * @return true if the piece is on a square of its team, false otherwise.
+	 */
 	public boolean isPiecesStairway(Piece piece) {
 		if (piece == null)
 			throw new IllegalArgumentException();
@@ -382,6 +448,9 @@ public class HorsesGame extends Game {
 		return false;
 	}
 
+	/**
+	 * Tests the model of the game in console mode.
+	 */
 	public static void test() {
 		HorsesGame game = new HorsesGame(4, 4);
 		System.out.println(game.getBoard().toString());
@@ -414,11 +483,4 @@ public class HorsesGame extends Game {
 		System.out.println(game.getBoard().toString());
 
 	}
-
-	@Override
-	public void runGame() {
-		// This method is used to run the game in console mode.
-		
-	}
-
 }
