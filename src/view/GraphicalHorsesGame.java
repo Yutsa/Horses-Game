@@ -30,7 +30,7 @@ import piece.Piece;
  */
 public class GraphicalHorsesGame extends JFrame {
 	private static final long serialVersionUID = 466892845740861801L;
-	private HorsesGame game = new HorsesGame(4, 1);
+	private HorsesGame game = new HorsesGame(4, 4);
 	private BoardPanel boardPanel;
 	private MenuPanel menuPanel;
 	private JLabel[] diceResultLabels;
@@ -40,7 +40,7 @@ public class GraphicalHorsesGame extends JFrame {
 	public GraphicalHorsesGame() {
 		// Place a Piece on the final step of the stairway to test the win
 		// condition.
-		game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
+		//game.getTeam(0).getPiece(0).setSquare(game.getBoard().getSquare(6, 7));
 
 		this.setResizable(false);
 

@@ -284,7 +284,7 @@ public class HorsesGame extends Game {
 				|| (pieceSquare instanceof BottomStairway && !pieceSquare.getTeam().equals(piece.getTeam()))) {
 			Square nextSquare = getNextSquare(pieceSquare);
 			if (!nextSquare.isEmpty()) {
-				if (nbDeplacement == 1)
+				if (nbDeplacement == 1 && !nextSquare.getPiecesTeam().equals(piece.getTeam()))
 					killPiece(piece, nextSquare.getPieceOnSquare());
 				else
 					throw new PathBlockedException();
@@ -346,7 +346,7 @@ public class HorsesGame extends Game {
 		Square previousSquare = getPreviousSquare(pieceSquare);
 
 		if (!previousSquare.isEmpty()) {
-			if (nbDeplacement == 1) {
+			if (nbDeplacement == 1 && !previousSquare.getPiecesTeam().equals(piece.getTeam())) {
 				killPiece(piece, previousSquare.getPieceOnSquare());
 			} else {
 				throw new PathBlockedException();

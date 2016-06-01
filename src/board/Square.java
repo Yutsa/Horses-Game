@@ -175,5 +175,13 @@ public abstract class Square {
 	public boolean isEmpty() {
 		return this.pieceOnSquare == null;
 	}
+	
+	/**
+	 * Gets the team of the Piece that is on this square.
+	 * @return The team of the Piece on this square.
+	 */
+	public Team getPiecesTeam() {
+		return pieceOnSquare.getTeam();
+	}
 
 }
