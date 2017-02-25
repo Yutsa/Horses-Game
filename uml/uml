@@ -1,0 +1,136 @@
+abstract class Board {
+-height : int
+-width : int
++getSquare(x : int, y : int) : Square
+}
+
+class BoardHorses {
++createBasicSquares()
++createStairwaySquares()
++createHorsePen()
++createBottomStairway()
+}
+
+abstract class Game {
+-nbTeam : int
+-nbPiece : int
+-currentTeam : int
++getCurrentTeam() : Team
++getCurrentTeamNb() : int
++nextTeam()
++createTeam(int color, Game game)
+}
+
+class HorsesGame {
++getNextSquare(Square square) : Square
++getPreviousSquare(Square square) : Square
++getNextStairway(Square square) : Square
++moveForward(Piece piece, int nbDeplacement) throws PathBlockedException
++moveBackward(Piece piece, int nbDeplacement) throws PathBlockedException
++killPiece(Piece killer, Piece killed)
++moveFromHorsePen(Piece piece, Square pieceSquare, Square startSquare)
++moveToStairway(Piece piece, int nbDeplacement)
++addPiecesToTeam()
++isPiecesStairway(Piece piece) : boolean
+}
+
+
+class PathBlockedException{
+}
+
+class Dice {
+-minimum : int
+-maximum : int
++roll() : int
+}
+
+abstract class Piece {
+-alive : boolean
+-startingSquareX : int
+-startingSquareY : int
+}
+
+abstract Square {
+-posX: int
+-posY: int
++isEmpty() : boolean
+}
+
+class Horse {
++canMove()
+}
+
+class HorsePen {
+}
+
+class StairwaySquare {
+-stairwayNumber : int
+}
+
+class BottomStairway {
+}
+
+class BasicSquare {
+}
+
+class JPanel {
+}
+
+class JFrame {
+}
+
+class GraphicalHorsesGame {
+-diceResultLabels : JLabel[]
+-diceButton : JButton
+-deciderFrame : JDialog
+}
+
+class BoardPanel {
++setUpBoard()
++displayBoard()
+}
+
+class MenuPanel {
+-diceResult : JLabel
+-teamLabel : JLabel
++setTeamLabelText(String msg)
+}
+
+class SquareButton {
+}
+
+class JButton {
+}
+
+class Team {
+-color
+-canPlay : boolean
++createPieces(int x, int y, boolean alive, Team team) : Piece
++hasPiecesLeft() : boolean
++canPlay() : boolean
++canMove(int diceNumber) : boolean
+}
+
+Piece <|-- Horse
+Square <|-- HorsePen
+Square <|-- StairwaySquare
+Square <|-- BottomStairway
+Square <|-- BasicSquare
+Board <|-- BoardHorses
+Game <|-- HorsesGame
+Board "1" *-- "* -squares" Square
+Game "1" *--> "1 -dice" Dice 
+Game "1" *--> "1 -board" Board
+Game "1" *--> "2..* -teams" Team
+Piece "0..4 -pieces"-- "1 -team" Team
+PathBlockedException o-- "2" Piece
+Square "1 square" -- "0..1 piecesOnSquare" Piece
+Square --> "1" Team : -team
+BoardPanel --|> JPanel
+GraphicalHorsesGame --|> JFrame
+MenuPanel --|> JPanel
+BoardPanel "1" -- "1" GraphicalHorsesGame
+MenuPanel "1" -- "1" GraphicalHorsesGame
+GraphicalHorsesGame --> HorsesGame : 1 game
+SquareButton --|> JButton
+SquareButton --> "*" BoardPanel

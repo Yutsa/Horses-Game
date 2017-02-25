@@ -42,7 +42,7 @@ public class MenuPanel extends JPanel {
 	private JLabel diceResult;
 	private JLabel teamLabel;
 	private JTextField debugDice;
-	//private JButton debugMove;
+//	private JButton debugMove;
 	
 	/**
 	 * @param game The instance of GraphicalHorsesGame this menu is for.
@@ -64,7 +64,7 @@ public class MenuPanel extends JPanel {
 		
 		
 		diceButton.addActionListener(diceListener);
-		this.setLayout(new GridLayout(3, 1));
+		this.setLayout(new GridLayout(3, 3));
 		
 		this.add(teamLabel);
 		this.add(diceButton);
